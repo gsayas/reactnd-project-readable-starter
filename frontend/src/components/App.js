@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import * as PostsAPI from './utils/PostsAPI';
+import PostList from './PostList.js';
+import '../App.css';
+import * as PostsAPI from '../utils/PostsAPI';
 
 class App extends Component {
 
@@ -9,7 +9,6 @@ class App extends Component {
     posts: [],
   }
 
-  //Load all the books in my 'library' (server) and put them in my state
   componentDidMount(){
     PostsAPI.getAllPosts().then((posts) => {
       this.setState({posts: posts})
@@ -21,11 +20,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        {posts.map((post) => (
-          <div key={post.id}>
-            {post.title}
-          </div>
-        ))}
+        <PostList posts={posts}/>
       </div>
     );
   }
