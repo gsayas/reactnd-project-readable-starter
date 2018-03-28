@@ -9,7 +9,7 @@ class Post extends React.Component {
   }
 
   render() {
-    const {listing} = this.props;
+    const {listing, post} = this.props;
 
     return (
       <div className="post">
@@ -18,6 +18,15 @@ class Post extends React.Component {
           :
           "post details"
         }
+        <div className="votes-wrapper">
+          <span className="vote-count">Votes: {post.voteScore}</span>
+          <button className='up-vote'>
+            +
+          </button>
+          <button className='down-vote'>
+            -
+          </button>
+        </div>
       </div>
     )
   }

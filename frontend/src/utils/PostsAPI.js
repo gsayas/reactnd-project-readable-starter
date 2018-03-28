@@ -21,6 +21,16 @@ export const getAllPosts = () =>
     .then(res => res.json())
     .then(data => data)
 
+export const vote = (post, vote) =>
+  fetch(`${api}/posts/${post.id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(vote ? 'upVote' : 'downVote')
+  }).then(res => res.json())
+
 /*
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
