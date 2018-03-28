@@ -1,4 +1,5 @@
 import React from 'react';
+import Post from './Post.js';
 import PropTypes from "prop-types";
 
 class PostList extends React.Component {
@@ -15,6 +16,10 @@ class PostList extends React.Component {
           {posts.map((post) => (
             <li key={post.id}>
               {post.title}
+              <Post
+                post={post}
+                listing={true}
+              />
             </li>
           ))}
         </ul>
@@ -23,5 +28,4 @@ class PostList extends React.Component {
 
   }
 }
-
 export default PostList;
