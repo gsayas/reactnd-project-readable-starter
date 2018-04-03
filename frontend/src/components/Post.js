@@ -9,9 +9,13 @@ class Post extends React.Component {
     listing: PropTypes.bool,
   }
 
+  handleVote = ({postIndex, vote}) => {
+    this.props.dispatch(castVoteOnPost({postIndex, vote}));
+  };
+
   render() {
-    const {listing, post} = this.props;
-    console.log(this.props);
+    const {listing, post, postIndex} = this.props;
+    console.log('rendering post');
 
     return (
       <div className="post">
@@ -21,7 +25,7 @@ class Post extends React.Component {
         }
         <div className="votes-wrapper">
           <span className="vote-count">Votes: {post.voteScore}</span>
-          <button onClick={() => this.props.dispatch(castVoteOnPost({post, vote: true}))} className='up-vote'>
+          <button onClick={() => this.handleVote({postIndex, vote: true})} className='up-vote'>
             +
           </button>
           <button className='down-vote'>

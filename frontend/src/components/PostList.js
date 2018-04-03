@@ -1,25 +1,37 @@
 import React from 'react';
-import Post from './Post.js';
-import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {castVoteOnPost, fetchPosts} from "../actions";
 
 class PostList extends React.Component {
-  static propTypes = {
-    posts: PropTypes.array.isRequired,
+
+  componentDidMount(){
+    this.props.dispatch(fetchPosts());
   }
+
+  handleVote = ({postIndex, vote}) => {
+    this.props.dispatch(castVoteOnPost({postIndex, vote}));
+  };
 
   render() {
     const {posts} = this.props;
+    console.log('rendering postList');
+    console.log(posts);
 
     return (
       <div className="post-list-wrapper">
         <ul className="post-list">
-          {posts.map((post) => (
+          {posts && Array.isArray(posts) && posts.map((post,postIndex) => (
             <li key={post.id}>
               {post.title}
-              <Post
-                post={post}
-                listing={true}
-              />
+              <div className="votes-wrapper">
+                <span className="vote-count">Votes: {post.voteScore}</span>
+                <button onClick={() => this.handleVote({postIndex, vote: true})} className='up-vote'>
+                  +
+                </button>
+                <button onClick={() => this.handleVote({postIndex, vote: false})} className='down-vote'>
+                  -
+                </button>
+              </div>
             </li>
           ))}
         </ul>
@@ -28,4 +40,11 @@ class PostList extends React.Component {
 
   }
 }
-export default PostList;
+
+function mapStateToProps ({postsReducer}) {
+  return {
+    posts: postsReducer.posts
+  }
+}
+
+export default connect(mapStateToProps)(PostList);

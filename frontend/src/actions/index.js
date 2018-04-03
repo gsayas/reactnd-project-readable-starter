@@ -2,10 +2,10 @@ import * as PostsAPI from '../utils/PostsAPI';
 export const CAST_VOTE_ON_POST = 'CAST_VOTE_ON_POST';
 export const LOAD_POSTS = 'LOAD_POSTS';
 
-export function castVoteOnPost ({post, vote}) {
+export function castVoteOnPost ({postIndex, vote}) {
   return {
     type: CAST_VOTE_ON_POST,
-    post,
+    postIndex,
     vote,
   }
 }
