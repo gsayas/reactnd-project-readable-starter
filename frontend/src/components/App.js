@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PostList from './PostList.js';
 import '../App.css';
 import * as PostsAPI from '../utils/PostsAPI';
+import {connect} from "react-redux";
+import {loadPosts, fetchPosts} from "../actions";
 
 class App extends Component {
 
@@ -10,9 +12,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    PostsAPI.getAllPosts().then((posts) => {
-      this.setState({posts: posts})
-    });
+    this.props.dispatch(fetchPosts());
   }
 
   render() {
@@ -26,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);
