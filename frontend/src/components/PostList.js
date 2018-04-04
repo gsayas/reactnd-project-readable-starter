@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {castVoteOnPost, fetchPosts} from "../actions";
+import * as PostsAPI from '../utils/PostsAPI';
+import {castVoteOnPost, fetchPosts, loadPosts} from "../actions";
 
 class PostList extends React.Component {
 
@@ -8,14 +9,18 @@ class PostList extends React.Component {
     this.props.dispatch(fetchPosts());
   }
 
-  handleVote = ({postIndex, vote}) => {
-    this.props.dispatch(castVoteOnPost({postIndex, vote}));
+  handleVote = ({postId, postIndex, vote}) => {
+    PostsAPI
+      .vote(postId, vote)
+      .then(
+        () => this.props.dispatch(castVoteOnPost({postIndex, vote}))
+      );
   };
 
   render() {
     const {posts} = this.props;
-    console.log('rendering postList');
-    console.log(posts);
+    // console.log('rendering postList');
+    // console.log(posts);
 
     return (
       <div className="post-list-wrapper">
@@ -25,10 +30,10 @@ class PostList extends React.Component {
               {post.title}
               <div className="votes-wrapper">
                 <span className="vote-count">Votes: {post.voteScore}</span>
-                <button onClick={() => this.handleVote({postIndex, vote: true})} className='up-vote'>
+                <button onClick={() => this.handleVote({postId: post.id, postIndex, vote: true})} className='up-vote'>
                   +
                 </button>
-                <button onClick={() => this.handleVote({postIndex, vote: false})} className='down-vote'>
+                <button onClick={() => this.handleVote({postId: post.id, postIndex, vote: false})} className='down-vote'>
                   -
                 </button>
               </div>

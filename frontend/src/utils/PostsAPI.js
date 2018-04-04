@@ -21,14 +21,14 @@ export const getAllPosts = () =>
     .then(res => res.json())
     .then(data => data)
 
-export const vote = (post, vote) =>
-  fetch(`${api}/posts/${post.id}`, {
+export const vote = (postId, vote) =>
+  fetch(`${api}/posts/${postId}`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(vote ? 'upVote' : 'downVote')
+    body: JSON.stringify({option: vote ? 'upVote' : 'downVote'})
   }).then(res => res.json())
 
 /*
