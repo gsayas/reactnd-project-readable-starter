@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-// import * as PostsAPI from '../utils/PostsAPI';
 import Post from './Post.js';
 import {fetchPosts} from "../actions";
 

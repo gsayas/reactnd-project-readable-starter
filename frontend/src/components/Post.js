@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {asyncCastVoteOnPost} from "../actions";
 
@@ -20,7 +21,7 @@ class Post extends React.Component {
 
     return (
       <div className="post">
-        <h3>{post.title}</h3>
+        <h3><Link to={'/post/' + post.id}>{post.title}</Link></h3>
         <div className="author">{post.author}</div>
         <div className="post-body">{post.body}</div>
         <div className="votes-wrapper">
