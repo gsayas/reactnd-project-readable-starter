@@ -1,21 +1,30 @@
-import {CAST_VOTE_ON_POST, LOAD_POSTS} from '../actions';
+import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST} from '../actions';
 import { combineReducers } from 'redux';
 
-const initialPostsState = {someState: 'state'}
+const initialPostsState = {
+  posts: []
+}
 
 function postsReducer (state = initialPostsState, action) {
-  const {postId, vote} = action;
 
   switch  (action.type) {
     case CAST_VOTE_ON_POST:
       return {
         ...state,
-        posts: updateVotesForPost(state.posts, postId, vote)
+        posts: updateVotesForPost(state.posts, action.postId, action.vote)
       }
     case LOAD_POSTS:
       return {
         ...state,
         posts: action.posts,
+      }
+    case LOAD_POST:
+      return {
+        ...state,
+        posts: [
+          ...state.posts,
+          action.post
+        ],
       }
     default :
       return state;

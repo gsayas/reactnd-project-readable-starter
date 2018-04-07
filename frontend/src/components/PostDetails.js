@@ -2,7 +2,7 @@ import React from 'react';
 import * as PostsAPI from '../utils/PostsAPI';
 import Post from './Post.js';
 import {connect} from "react-redux";
-import {loadPost, loadPosts} from "../actions";
+import {loadPost} from "../actions";
 
 
 class PostDetails extends React.Component {
@@ -10,26 +10,24 @@ class PostDetails extends React.Component {
 
   componentDidMount(){
     const postId = this.props.postId;
-    if (this.props.posts === undefined || this.props.posts[postId] === undefined) {
+    if (this.props.posts === undefined || !this.props.posts.find(item => item.id === postId)) {
       PostsAPI
-        .getAllPosts()//(postId)//TODO: sanitize
-        .then((posts) => this.props.dispatch(loadPosts(posts)))
+        .getPost(postId) //TODO: sanitize
+        .then((post) => this.props.dispatch(loadPost(post)))
       //.then(() => this.props.dispatch(loadPosts(postId)))
         //TODO: render 404 if id is not valid
-
     }
-
   }
 
   render() {
-    console.log(this.props.posts);
     const {postId, posts} = this.props;
-    const post = posts ? posts.find(item => item.id === postId):false;
-    // console.log(post);
+    const post = posts ? posts.find(item => item.id === postId) : false;
     //TODO: refactor, change posts index to be postId
 
     return (
-      post && <div className='post-details'>{post.title}</div>
+      <div className='post-details-wrapper'>
+        {post && <Post listing={false} post={post} />}
+      </div>
     );
   }
 }

@@ -11,7 +11,7 @@ class PostList extends React.Component {
 
   render() {
     const {posts} = this.props;
-     console.log('rendering postList');
+    //  console.log('rendering postList');
     // console.log(posts);
 
     return (

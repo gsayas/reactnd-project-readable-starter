@@ -8,8 +8,6 @@ import '../App.css';
 class App extends Component {
 
   render() {
-    console.log('rendering app');
-
     return (
       <div className="App">
        <Route exact path='/' render={() => (

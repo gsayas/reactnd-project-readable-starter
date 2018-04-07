@@ -16,8 +16,7 @@ class Post extends React.Component {
 
   render() {
     const {listing, post} = this.props;
-
-    console.log('rendering post');
+    // console.log('rendering post');
 
     return (
       <div className="post">
