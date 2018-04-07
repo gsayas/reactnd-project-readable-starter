@@ -10,8 +10,8 @@ class Post extends React.Component {
     listing: PropTypes.bool,
   }
 
-  handleVote = ({postId, vote}) => {
-    this.props.dispatch(asyncCastVoteOnPost({postId, vote}));
+  handleVote = (postId, vote) => {
+    this.props.dispatch(asyncCastVoteOnPost({postId: postId, vote: vote}));
   };
 
   render() {
@@ -25,13 +25,14 @@ class Post extends React.Component {
         <div className="post-body">{post.body}</div>
         <div className="votes-wrapper">
           <span className="vote-count">Votes: {post.voteScore}</span>
-          <button onClick={() => this.handleVote({postId: post.id, vote: true})} className='up-vote'>
+          <button onClick={() => this.handleVote(post.id, true)} className='up-vote'>
             +
           </button>
-          <button onClick={() => this.handleVote({postId: post.id, vote: false})} className='down-vote'>
+          <button onClick={() => this.handleVote(post.id, false)} className='down-vote'>
             -
           </button>
         </div>
+        <div className="post-timestamp">{(new Date(post.timestamp)).toDateString()}</div>
       </div>
     )
   }
