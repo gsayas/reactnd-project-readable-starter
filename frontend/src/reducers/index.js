@@ -1,8 +1,9 @@
-import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST} from '../actions';
+import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST, TOGGLE_ORDER} from '../actions';
 import { combineReducers } from 'redux';
 
 const initialPostsState = {
-  posts: []
+  posts: [],
+  orderBy: 'voteScore'
 }
 
 function postsReducer (state = initialPostsState, action) {
@@ -25,6 +26,12 @@ function postsReducer (state = initialPostsState, action) {
           ...state.posts,
           action.post
         ],
+      }
+    case TOGGLE_ORDER:
+      console.log(state);
+      return {
+        ...state,
+        orderBy: state.orderBy === action.orderBy ? '-' + state.orderBy : action.orderBy
       }
     default :
       return state;

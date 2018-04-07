@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Post from './Post.js';
-import {fetchPosts} from "../actions";
+import {fetchPosts, toggleOrder} from "../actions";
 import sortBy from 'sort-by';
 
 class PostList extends React.Component {
@@ -13,13 +13,13 @@ class PostList extends React.Component {
   }
 
   handleOrdering = (field) => {
-    const newOrder = this.state.orderBy === field ? '-' + field : field;
-    this.setState({orderBy: newOrder});
+    console.log(field);
+    this.props.dispatch(toggleOrder({orderBy: field}));
   };
 
   render() {
-    const {posts} = this.props;
-    const {orderBy} = this.state;
+    const {posts, orderBy} = this.props;
+    // const {} = this.state;
     //  console.log('rendering postList');
     // console.log(posts);
 
@@ -28,8 +28,8 @@ class PostList extends React.Component {
     return (
       <div className="post-list-wrapper">
         <span className='order-block'>Order by:&nbsp;
-          <a href='#' onClick={() => this.handleOrdering('voteScore')}>votes</a>|
-          <a href='#' onClick={() => this.handleOrdering('timestamp')}>date</a>
+          <a href='javascript:void(0)' onClick={() => this.handleOrdering('voteScore')}>votes</a>|
+          <a href='javascript:void(0)' onClick={() => this.handleOrdering('timestamp')}>date</a>
         </span>
         <ul className="post-list">
           {posts && posts.map((post) => (
@@ -48,9 +48,7 @@ class PostList extends React.Component {
 }
 
 function mapStateToProps ({postsReducer}) {
-  return {
-    posts: postsReducer.posts
-  }
+  return postsReducer
 }
 
 export default connect(mapStateToProps)(PostList);
