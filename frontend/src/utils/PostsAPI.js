@@ -26,8 +26,8 @@ export const getPostComments = (postId) =>
     .then(res => res.json())
     .then(data => data)
 
-export const vote = (postId, vote) =>
-  fetch(`${api}/posts/${postId}`, {
+export const vote = (entityType, entityId, vote) =>
+  fetch(`${api}/${entityType}/${entityId}`, {
     method: 'POST',
     headers: {
       ...headers,

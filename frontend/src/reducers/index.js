@@ -1,4 +1,4 @@
-import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST, TOGGLE_ORDER, LOAD_COMMENTS} from '../actions';
+import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST, TOGGLE_ORDER, LOAD_COMMENTS, CAST_VOTE_ON_COMMENT} from '../actions';
 import { combineReducers } from 'redux';
 
 const initialPostsState = {
@@ -6,9 +6,7 @@ const initialPostsState = {
   orderBy: 'voteScore'
 }
 
-const initialCommentsState = {
-  comments: []
-}
+const initialCommentsState = {}
 
 function commentsReducer(state = initialCommentsState, action) {
   switch  (action.type) {
@@ -16,11 +14,31 @@ function commentsReducer(state = initialCommentsState, action) {
       return {
         ...state,
         [action.postId]: action.comments
-        // comments: action.comments
+      }
+    case CAST_VOTE_ON_COMMENT:
+      return {
+        ...state,
+        [action.postId]: updateVotesForEntity(state[action.postId], action.commentId, action.vote)
       }
     default :
       return state;
   }
+}
+
+function updateVotesForEntity(entities, entityId, vote) {
+
+  const entityIndex = entities.findIndex((item) => (item.id === entityId));
+
+  const currentVote = entities[entityIndex].voteScore;
+  return entities.map( (entity, index) => {
+    if(index !== entityIndex) {
+      return entity;
+    }
+    return {
+      ...entity,
+      voteScore: vote ? currentVote + 1 : currentVote - 1
+    };
+  });
 }
 
 function postsReducer (state = initialPostsState, action) {
@@ -29,7 +47,7 @@ function postsReducer (state = initialPostsState, action) {
     case CAST_VOTE_ON_POST:
       return {
         ...state,
-        posts: updateVotesForPost(state.posts, action.postId, action.vote)
+        posts: updateVotesForEntity(state.posts, action.postId, action.vote)
       }
     case LOAD_POSTS:
       return {
@@ -53,22 +71,6 @@ function postsReducer (state = initialPostsState, action) {
     default :
       return state;
   }
-}
-
-function updateVotesForPost(posts, postId, vote) {
-
-  const postIndex = posts.findIndex((item) => (item.id === postId));
-
-  const currentVote = posts[postIndex].voteScore;
-  return posts.map( (post, index) => {
-    if(index !== postIndex) {
-      return post;
-    }
-    return {
-      ...post,
-      voteScore: vote ? currentVote + 1 : currentVote - 1
-    };
-  });
 }
 
 export default combineReducers({

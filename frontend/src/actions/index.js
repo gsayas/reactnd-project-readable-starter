@@ -1,5 +1,6 @@
 import * as PostsAPI from '../utils/PostsAPI';
 export const CAST_VOTE_ON_POST = 'CAST_VOTE_ON_POST';
+export const CAST_VOTE_ON_COMMENT = 'CAST_VOTE_ON_COMMENT';
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_POST = 'LOAD_POST';
 export const LOAD_COMMENTS = 'LOAD_COMMENTS';
@@ -15,8 +16,25 @@ export function castVoteOnPost ({postId, vote}) {
 
 export const asyncCastVoteOnPost = ({postId, vote}) => dispatch => (
   PostsAPI
-    .vote(postId, vote)
+    .vote('posts',postId, vote)
     .then(() => dispatch(castVoteOnPost({postId, vote})))
+);
+
+
+
+export function castVoteOnComment ({postId, commentId, vote}) {
+  return {
+    type: CAST_VOTE_ON_COMMENT,
+    postId,
+    commentId,
+    vote,
+  }
+}
+
+export const asyncCastVoteOnComment = ({postId, commentId, vote}) => dispatch => (
+  PostsAPI
+    .vote('comments',commentId, vote)
+    .then(() => dispatch(castVoteOnComment({postId, commentId, vote})))
 );
 
 export const loadPosts = posts => ({

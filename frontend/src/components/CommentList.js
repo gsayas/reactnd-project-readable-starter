@@ -14,6 +14,8 @@ class CommentList extends React.Component {
     const globalComments = this.props.comments;
     const comments = globalComments[this.props.postId];
 
+    comments && comments.sort(sortBy('-voteScore'));
+
     return (
       <div className="comment-list-wrapper">
         <ul className="comment-list">

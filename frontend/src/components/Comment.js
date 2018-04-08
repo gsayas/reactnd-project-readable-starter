@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-// import {asyncCastVoteOnComment} from "../actions";
+import {asyncCastVoteOnComment} from "../actions";
 
 
 class Comment extends React.Component {
@@ -10,9 +10,9 @@ class Comment extends React.Component {
     listing: PropTypes.bool,
   }
 
-  handleVote = (commentId, vote) => {
+  handleVote = (parentId, commentId, vote) => {
     console.log(commentId);
-    // this.props.dispatch(asyncCastVoteOnComment({commentId: commentId, vote: vote}));
+    this.props.dispatch(asyncCastVoteOnComment({postId: parentId, commentId: commentId, vote: vote}));
   };
 
   render() {
@@ -25,10 +25,10 @@ class Comment extends React.Component {
         <div className="comment-body">{comment.body}</div>
         <div className="votes-wrapper">
           <span className="vote-count">Votes: {comment.voteScore}</span>
-          <button onClick={() => this.handleVote(comment.id, true)} className='up-vote'>
+          <button onClick={() => this.handleVote(comment.parentId, comment.id, true)} className='up-vote'>
             +
           </button>
-          <button onClick={() => this.handleVote(comment.id, false)} className='down-vote'>
+          <button onClick={() => this.handleVote(comment.parentId, comment.id, false)} className='down-vote'>
             -
           </button>
         </div>
@@ -37,4 +37,4 @@ class Comment extends React.Component {
     )
   }
 }
-export default Comment;
+export default connect()(Comment);
