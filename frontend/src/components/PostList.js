@@ -27,8 +27,8 @@ class PostList extends React.Component {
 
     return (
       <div className="post-list-wrapper">
-        <span className='order-block'>Order by:&nbsp;
-          <a href='javascript:void(0)' onClick={() => this.handleOrdering('voteScore')}>votes</a>|
+        <span className='order-block'>Sort by:&nbsp;
+          <a href='javascript:void(0)' onClick={() => this.handleOrdering('voteScore')}>score</a>|
           <a href='javascript:void(0)' onClick={() => this.handleOrdering('timestamp')}>date</a>
         </span>
         <ul className="post-list">

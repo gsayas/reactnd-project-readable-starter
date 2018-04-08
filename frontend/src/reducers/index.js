@@ -1,9 +1,26 @@
-import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST, TOGGLE_ORDER} from '../actions';
+import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST, TOGGLE_ORDER, LOAD_COMMENTS} from '../actions';
 import { combineReducers } from 'redux';
 
 const initialPostsState = {
   posts: [],
   orderBy: 'voteScore'
+}
+
+const initialCommentsState = {
+  comments: []
+}
+
+function commentsReducer(state = initialCommentsState, action) {
+  switch  (action.type) {
+    case LOAD_COMMENTS:
+      return {
+        ...state,
+        [action.postId]: action.comments
+        // comments: action.comments
+      }
+    default :
+      return state;
+  }
 }
 
 function postsReducer (state = initialPostsState, action) {
@@ -17,7 +34,7 @@ function postsReducer (state = initialPostsState, action) {
     case LOAD_POSTS:
       return {
         ...state,
-        posts: action.posts,
+        posts: action.posts,//TODO: understand why this works (action's post property being accesible by 'post' label)
       }
     case LOAD_POST:
       return {
@@ -56,4 +73,5 @@ function updateVotesForPost(posts, postId, vote) {
 
 export default combineReducers({
   postsReducer,
+  commentsReducer
 });

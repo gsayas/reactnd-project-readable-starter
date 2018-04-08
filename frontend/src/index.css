@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-.post {
+.post, .comment {
     margin-top: 10px;
     margin-bottom: 30px;
 }

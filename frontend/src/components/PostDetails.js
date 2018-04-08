@@ -1,6 +1,7 @@
 import React from 'react';
 import * as PostsAPI from '../utils/PostsAPI';
 import Post from './Post.js';
+import CommentList from './CommentList.js';
 import {connect} from "react-redux";
 import {loadPost} from "../actions";
 
@@ -27,6 +28,7 @@ class PostDetails extends React.Component {
     return (
       <div className='post-details-wrapper'>
         {post && <Post listing={false} post={post} />}
+        {post && <CommentList postId={post.id} />}
       </div>
     );
   }

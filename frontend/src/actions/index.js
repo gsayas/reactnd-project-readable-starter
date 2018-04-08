@@ -2,6 +2,7 @@ import * as PostsAPI from '../utils/PostsAPI';
 export const CAST_VOTE_ON_POST = 'CAST_VOTE_ON_POST';
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_POST = 'LOAD_POST';
+export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const TOGGLE_ORDER = 'TOGGLE_ORDER';
 
 export function castVoteOnPost ({postId, vote}) {
@@ -40,3 +41,15 @@ export function toggleOrder ({orderBy}) {
     orderBy
   }
 }
+
+export const loadComments = ({postId, comments}) => ({
+  type: LOAD_COMMENTS,
+  postId,
+  comments
+});
+
+export const fetchComments = (postId) => dispatch => (
+  PostsAPI
+    .getPostComments(postId)
+    .then((comments) => dispatch(loadComments({postId, comments})))
+);
