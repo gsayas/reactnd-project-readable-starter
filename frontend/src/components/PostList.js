@@ -6,22 +6,16 @@ import sortBy from 'sort-by';
 
 class PostList extends React.Component {
 
-  state = {orderBy: 'voteScore'};
-
   componentDidMount(){
     this.props.dispatch(fetchPosts());
   }
 
   handleOrdering = (field) => {
-    console.log(field);
     this.props.dispatch(toggleOrder({orderBy: field}));
   };
 
   render() {
     const {posts, orderBy} = this.props;
-    // const {} = this.state;
-    //  console.log('rendering postList');
-    // console.log(posts);
 
     posts.sort(sortBy(orderBy));
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {asyncCastVoteOnComment} from "../actions";
 
@@ -11,14 +10,12 @@ class Comment extends React.Component {
   }
 
   handleVote = (parentId, commentId, vote) => {
-    console.log(commentId);
     this.props.dispatch(asyncCastVoteOnComment({postId: parentId, commentId: commentId, vote: vote}));
   };
 
   render() {
     const {comment} = this.props;
-    // console.log('rendering comment');
-
+    
     return (
       <div className="comment">
         <div className="author">{comment.author}</div>

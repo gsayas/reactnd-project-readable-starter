@@ -52,7 +52,7 @@ function postsReducer (state = initialPostsState, action) {
     case LOAD_POSTS:
       return {
         ...state,
-        posts: action.posts,//TODO: understand why this works (action's post property being accesible by 'post' label)
+        posts: action.posts,
       }
     case LOAD_POST:
       return {

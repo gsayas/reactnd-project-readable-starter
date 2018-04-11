@@ -8,29 +8,41 @@ import {loadPost} from "../actions";
 
 class PostDetails extends React.Component {
 
+  state = {
+    postFound: true
+  }
 
   componentDidMount(){
     const postId = this.props.postId;
     if (this.props.posts === undefined || !this.props.posts.find(item => item.id === postId)) {
       PostsAPI
-        .getPost(postId) //TODO: sanitize
+        .getPost(postId)
         .then((post) => this.props.dispatch(loadPost(post)))
-      //.then(() => this.props.dispatch(loadPosts(postId)))
-        //TODO: render 404 if id is not valid
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.posts.length !== 0) {
+      if (nextProps.posts.find((post) => post.id === nextProps.postId) === undefined) {
+        this.setState({ postFound: false })
+      }
     }
   }
 
   render() {
     const {postId, posts} = this.props;
     const post = posts ? posts.find(item => item.id === postId) : false;
-    //TODO: refactor, change posts index to be postId
 
-    return (
-      <div className='post-details-wrapper'>
-        {post && <Post listing={false} post={post} />}
-        {post && <CommentList postId={post.id} />}
-      </div>
-    );
+    if( this.state.postFound === true ) {
+      return (
+        <div className='post-details-wrapper'>
+          {post && <Post listing={false} post={post}/>}
+          {post && <CommentList postId={post.id}/>}
+        </div>
+      );
+    }else{
+      return (<div className='not-found'>Page not found</div>);
+    }
   }
 }
 
