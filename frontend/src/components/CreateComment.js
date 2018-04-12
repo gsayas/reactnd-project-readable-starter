@@ -15,7 +15,7 @@ class CreateComment extends Component {
       modalOpen: isOpen,
     }))
   }
-  saveComment = (e) => {
+  handleSubmitComment = (e) => {
     // if (!this.input.value) {
     //   return
     // }
@@ -41,7 +41,7 @@ class CreateComment extends Component {
           modalOpen: false,
           savingComment: false,
         }));
-        this.props.dispatch(fetchComments(this.props.postId));
+        this.props.dispatch(fetchComments(this.props.postId));//TODO: avoid loading all the posts
       })
   }
   render() {
@@ -64,7 +64,7 @@ class CreateComment extends Component {
           <div>
             {savingComment === true
               ? <Loading delay={200} type='spin' color='#222' className='loading' />
-              : <form onSubmit={this.saveComment}>
+              : <form onSubmit={this.handleSubmitComment}>
                   <h3 className='sub-header'>
                     Add new comment
                   </h3>
