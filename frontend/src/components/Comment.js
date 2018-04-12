@@ -15,7 +15,7 @@ class Comment extends React.Component {
 
   render() {
     const {comment} = this.props;
-    
+
     return (
       <div className="comment">
         <div className="author">{comment.author}</div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PostList from './PostList.js';
 import {Route} from 'react-router-dom';
 import PostDetails from './PostDetails.js';
+import Modal from 'react-modal';
 import '../App.css';
 //TODO: optimize imports
 
@@ -22,5 +23,7 @@ class App extends Component {
     );
   }
 }
+
+Modal.setAppElement('#root');
 
 export default App;

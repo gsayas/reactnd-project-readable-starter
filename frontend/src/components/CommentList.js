@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {fetchComments} from "../actions";
 import Comment from './Comment.js';
+import CreateComment from './CreateComment.js';
 import sortBy from 'sort-by';
 
 class CommentList extends React.Component {
@@ -18,6 +19,7 @@ class CommentList extends React.Component {
 
     return (
       <div className="comment-list-wrapper">
+        <CreateComment postId={this.props.postId}/>
         <ul className="comment-list">
           {comments && comments.map((comment) => (
             <li key={comment.id}>

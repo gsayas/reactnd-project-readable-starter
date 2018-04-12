@@ -20,8 +20,6 @@ export const asyncCastVoteOnPost = ({postId, vote}) => dispatch => (
     .then(() => dispatch(castVoteOnPost({postId, vote})))
 );
 
-
-
 export function castVoteOnComment ({postId, commentId, vote}) {
   return {
     type: CAST_VOTE_ON_COMMENT,
