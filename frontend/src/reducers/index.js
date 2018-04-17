@@ -28,9 +28,30 @@ function commentsReducer(state = initialCommentsState, action) {
           action.comment
         ]
       }
+    case Actions.EDIT_COMMENT:
+      return {
+        ...state,
+        [action.postId]: updateBodyForEntity(state[action.postId], action.comment.id, action.comment.body)
+      }
     default :
       return state;
   }
+}
+
+//an entity here can be either a Post or a Comment
+function updateBodyForEntity(entities, entityId, entityBody) {
+
+  const entityIndex = entities.findIndex((item) => (item.id === entityId));
+
+  return entities.map( (entity, index) => {
+    if(index !== entityIndex) {
+      return entity;
+    }
+    return {
+      ...entity,
+      body: entityBody
+    };
+  });
 }
 
 //an entity here can be either a Post or a Comment

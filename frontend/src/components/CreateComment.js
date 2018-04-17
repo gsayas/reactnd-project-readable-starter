@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import Loading from 'react-loading'
 import {connect} from 'react-redux';
 import {saveComment, updateComment, getUUID} from '../utils/PostsAPI';
-import {fetchComments, loadPost, addComment} from "../actions";
+import {fetchComments, loadPost, addComment, editComment} from "../actions";
 
 class CreateComment extends Component {
   state = {
@@ -55,21 +55,24 @@ class CreateComment extends Component {
     if(this.props.comment === undefined) {
       saveComment(newComment)
         .then((savedComment) => {
-          this.afterSave(savedComment);
+          this.afterSave();
+          this.props.dispatch(addComment({comment: savedComment, postId: this.props.postId}));
         })
     }else {
+      console.log(newComment);
       updateComment(newComment)
         .then((savedComment) => {
-          this.afterSave(savedComment);
+          // console.log(postId: this.props.postId);
+          this.afterSave();
+          this.props.dispatch(editComment({comment: newComment, postId: newComment.parentId}));
         })
     }
   }
-  afterSave = (newComment) => {
+  afterSave = () => {
     this.setState(() => ({
       modalOpen: false,
       savingComment: false,
     }));
-    this.props.dispatch(addComment({comment: newComment, postId: this.props.postId}));
     //this.props.dispatch(loadPost(this.props.postId));
     //this.props.dispatch(updateComment(this.props.postId, commentId));
   }
