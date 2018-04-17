@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import {asyncCastVoteOnComment} from "../actions";
+import {Link} from 'react-router-dom';
+import CreateComment from './CreateComment.js';
 
 
 class Comment extends React.Component {
@@ -14,10 +16,14 @@ class Comment extends React.Component {
   };
 
   render() {
-    const {comment} = this.props;
+    const {comment, postId} = this.props;
 
     return (
       <div className="comment">
+        <div className='links'>
+          <CreateComment postId={postId} comment={comment}/>|
+          <Link to={'/delete/' + postId}>delete</Link>
+        </div>
         <div className="author">{comment.author}</div>
         <div className="comment-body">{comment.body}</div>
         <div className="votes-wrapper">

@@ -5,6 +5,7 @@ export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_POST = 'LOAD_POST';
 export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const TOGGLE_ORDER = 'TOGGLE_ORDER';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 export function castVoteOnPost ({postId, vote}) {
   return {
@@ -69,3 +70,15 @@ export const fetchComments = (postId) => dispatch => (
     .getPostComments(postId)
     .then((comments) => dispatch(loadComments({postId, comments})))
 );
+
+export const addComment = ({comment, postId}) => ({
+  type: ADD_COMMENT,
+  postId,
+  comment
+});
+
+/*export const updateComment = ({comment, postId}) => ({
+  type: UPDATE_COMMENT,
+  postId,
+  comment
+});*/

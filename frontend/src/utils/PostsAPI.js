@@ -46,6 +46,16 @@ export const saveComment = (comment) =>
     body: JSON.stringify({...comment})
   }).then(res => res.json())
 
+export const updateComment = (comment) =>
+  fetch(`${api}/comments/${comment.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({...comment})
+  }).then(res => res.json())
+
 export const getUUID = () => {
   return Math.random().toString(36).substring(2)+(new Date()).getTime().toString(36);
 }

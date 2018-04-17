@@ -1,4 +1,4 @@
-import {CAST_VOTE_ON_POST, LOAD_POSTS, LOAD_POST, TOGGLE_ORDER, LOAD_COMMENTS, CAST_VOTE_ON_COMMENT} from '../actions';
+import * as Actions from '../actions';
 import { combineReducers } from 'redux';
 
 const initialPostsState = {
@@ -10,21 +10,30 @@ const initialCommentsState = {}
 
 function commentsReducer(state = initialCommentsState, action) {
   switch  (action.type) {
-    case LOAD_COMMENTS:
+    case Actions.LOAD_COMMENTS:
       return {
         ...state,
         [action.postId]: action.comments
       }
-    case CAST_VOTE_ON_COMMENT:
+    case Actions.CAST_VOTE_ON_COMMENT:
       return {
         ...state,
         [action.postId]: updateVotesForEntity(state[action.postId], action.commentId, action.vote)
+      }
+    case Actions.ADD_COMMENT:
+      return {
+        ...state,
+        [action.postId]: [
+          ...state[action.postId],
+          action.comment
+        ]
       }
     default :
       return state;
   }
 }
 
+//an entity here can be either a Post or a Comment
 function updateVotesForEntity(entities, entityId, vote) {
 
   const entityIndex = entities.findIndex((item) => (item.id === entityId));
@@ -41,20 +50,41 @@ function updateVotesForEntity(entities, entityId, vote) {
   });
 }
 
+function updateCommentCountForPost(entities, entityId, addOrRemove) {
+
+  const entityIndex = entities.findIndex((item) => (item.id === entityId));
+
+  const currentCommentCount = entities[entityIndex].commentCount;
+  return entities.map( (entity, index) => {
+    if(index !== entityIndex) {
+      return entity;
+    }
+    return {
+      ...entity,
+      commentCount: addOrRemove ? currentCommentCount + 1 : currentCommentCount - 1
+    };
+  });
+}
+
 function postsReducer (state = initialPostsState, action) {
 
   switch  (action.type) {
-    case CAST_VOTE_ON_POST:
+    case Actions.CAST_VOTE_ON_POST:
       return {
         ...state,
         posts: updateVotesForEntity(state.posts, action.postId, action.vote)
       }
-    case LOAD_POSTS:
+    case Actions.ADD_COMMENT:
+      return {
+        ...state,
+        posts: updateCommentCountForPost(state.posts, action.postId, true)
+      }
+    case Actions.LOAD_POSTS:
       return {
         ...state,
         posts: action.posts,
       }
-    case LOAD_POST:
+    case Actions.LOAD_POST:
       return {
         ...state,
         posts: [
@@ -62,8 +92,19 @@ function postsReducer (state = initialPostsState, action) {
           action.post
         ],
       }
-    case TOGGLE_ORDER:
-      console.log(state);
+    /*case UPDATE_POST_COMMENT_COUNT:
+      return {
+        ...state,
+        posts: updateCommentCountForPost(state.posts, action.postId, action.addOrRemove)
+      }
+      return {
+        ...state,
+        posts: [
+          ...state.posts,
+          action.post
+        ],
+      }*/
+    case Actions.TOGGLE_ORDER:
       return {
         ...state,
         orderBy: state.orderBy === action.orderBy ? '-' + state.orderBy : action.orderBy
