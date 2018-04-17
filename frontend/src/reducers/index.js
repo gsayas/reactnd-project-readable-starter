@@ -33,6 +33,11 @@ function commentsReducer(state = initialCommentsState, action) {
         ...state,
         [action.postId]: updateBodyForEntity(state[action.postId], action.comment.id, action.comment.body)
       }
+    case Actions.REMOVE_COMMENT:
+      return {
+        ...state,
+        [action.postId]: state[action.postId].filter((item) => item.id !== action.commentId)
+      }
     default :
       return state;
   }
@@ -99,6 +104,11 @@ function postsReducer (state = initialPostsState, action) {
       return {
         ...state,
         posts: updateCommentCountForPost(state.posts, action.postId, true)
+      }
+    case Actions.REMOVE_COMMENT:
+      return {
+        ...state,
+        posts: updateCommentCountForPost(state.posts, action.postId, false)
       }
     case Actions.LOAD_POSTS:
       return {

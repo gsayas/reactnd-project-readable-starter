@@ -59,12 +59,10 @@ class CreateComment extends Component {
           this.props.dispatch(addComment({comment: savedComment, postId: this.props.postId}));
         })
     }else {
-      console.log(newComment);
       updateComment(newComment)
-        .then((savedComment) => {
-          // console.log(postId: this.props.postId);
+        .then(() => {
           this.afterSave();
-          this.props.dispatch(editComment({comment: newComment, postId: newComment.parentId}));
+          this.props.dispatch(editComment({comment: newComment, postId: this.props.postId}));
         })
     }
   }

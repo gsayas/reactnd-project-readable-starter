@@ -7,6 +7,7 @@ export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const TOGGLE_ORDER = 'TOGGLE_ORDER';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
 export function castVoteOnPost ({postId, vote}) {
   return {
@@ -82,4 +83,10 @@ export const editComment = ({comment, postId}) => ({
   type: EDIT_COMMENT,
   postId,
   comment
+});
+
+export const removeComment = ({postId, commentId}) => ({
+  type: REMOVE_COMMENT,
+  postId,
+  commentId
 });

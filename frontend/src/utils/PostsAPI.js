@@ -56,6 +56,15 @@ export const updateComment = (comment) =>
     body: JSON.stringify({...comment})
   }).then(res => res.json())
 
+export const deleteComment = (commentId) =>
+  fetch(`${api}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  }).then(res => res.json())
+
 export const getUUID = () => {
   return Math.random().toString(36).substring(2)+(new Date()).getTime().toString(36);
 }
