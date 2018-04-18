@@ -44,11 +44,11 @@ class FormModal extends Component {
 
   render() {
     const {modalOpen, savingComment} = this.state;
-    const {editMode, title} = this.props;
+    const {isEditMode, title} = this.props;
 
     return (
       <div className='create-comment-wrapper'>
-        {editMode
+        {isEditMode
         ? <a
             href='javascript:void(0)'
             onClick={()=>this.handleModalOpen()}>
@@ -74,7 +74,7 @@ class FormModal extends Component {
                   {title}
                 </h3>
                 <div className='comment-form'>
-                  {!editMode
+                  {!isEditMode
                     ?<input
                       className='comment-author-input'
                       type='text'

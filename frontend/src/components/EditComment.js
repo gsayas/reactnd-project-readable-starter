@@ -30,7 +30,7 @@ class EditComment extends Component {
           onRef={ref => {this.modal = ref}}
           comment={comment}
           title='Edit Comment'
-          editMode={true}
+          isEditMode={true}
         />
       </div>
     )
