@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Loading from 'react-loading'
 import {connect} from 'react-redux';
-import {saveComment, getUUID} from '../utils/PostsAPI';
-import {addComment} from "../actions";
+import {updateComment} from '../utils/PostsAPI';
+import {editComment} from "../actions";
 
 class CreateComment extends Component {
   state = {
@@ -14,8 +14,11 @@ class CreateComment extends Component {
     formPristine: true
   }
   handleModalOpen = () => {
+    const {comment} = this.props;
     this.setState(() => ({
       modalOpen: true,
+      formAuthor: comment.author,
+      formBody: comment.body
     }));
   }
   handleModalClose = () => {
@@ -38,20 +41,18 @@ class CreateComment extends Component {
 
     this.setState(() => ({ savingComment: true }))
 
-    let newComment = {};
-    newComment.id = getUUID();
-    newComment.parentId = this.props.postId;
+    let newComment = this.props.comment;
     newComment.timestamp = (new Date()).getTime();
     newComment.author = this.state.formAuthor;
     newComment.body = this.state.formBody;
 
-    saveComment(newComment)
-      .then((savedComment) => {
+    updateComment(newComment)
+      .then(() => {
         this.setState(() => ({
           modalOpen: false,
           savingComment: false,
         }));
-        this.props.dispatch(addComment({comment: savedComment, postId: this.props.postId}));
+        this.props.dispatch(editComment({comment: newComment, postId: newComment.parentId}));
       })
 
   }
@@ -61,17 +62,11 @@ class CreateComment extends Component {
 
     return (
       <div className='create-comment-wrapper'>
-        {comment !== undefined
-        ?<a
+        <a
           href='javascript:void(0)'
           onClick={()=>this.handleModalOpen()}>
           edit
         </a>
-        :<button
-          onClick={()=>this.handleModalOpen()}
-          className='leave-comment'>
-          Leave a comment!
-        </button>}
         <Modal
           className='modal'
           overlayClassName='overlay'
@@ -83,31 +78,31 @@ class CreateComment extends Component {
             {savingComment === true
               ? <Loading delay={200} type='spin' color='#222' className='loading' />
               : <form onSubmit={this.handleSubmitComment}>
-                  <h3 className='sub-header'>
-                    Add new comment
-                  </h3>
-                  <div className='comment-form'>
-                    {comment === undefined
-                      ?<input
-                        className='comment-author-input'
-                        type='text'
-                        placeholder='Author'
-                        value={this.state.formAuthor}
-                        onChange={(event)=>this.handleChange({formAuthor: event.target.value})}
-                      />:''}
-                      <textarea
-                        rows="4"
-                        cols="30"
-                        className='comment-body-input'
-                        placeholder='Insert your comment here'
-                        value={this.state.formBody}
-                        onChange={(event)=>this.handleChange({formBody: event.target.value})}
-                      />
-                    <button type="submit" disabled={false || savingComment}>{/*TODO: disable submit if form is empty*/}
-                      Submit
-                    </button>
-                  </div>
-                </form>}
+                <h3 className='sub-header'>
+                  Edit comment
+                </h3>
+                <div className='comment-form'>
+                  {comment === undefined
+                    ?<input
+                      className='comment-author-input'
+                      type='text'
+                      placeholder='Author'
+                      value={this.state.formAuthor}
+                      onChange={(event)=>this.handleChange({formAuthor: event.target.value})}
+                    />:''}
+                  <textarea
+                    rows="4"
+                    cols="30"
+                    className='comment-body-input'
+                    placeholder='Insert your comment here'
+                    value={this.state.formBody}
+                    onChange={(event)=>this.handleChange({formBody: event.target.value})}
+                  />
+                  <button type="submit" disabled={false || savingComment}>{/*TODO: disable submit if form is empty*/}
+                    Submit
+                  </button>
+                </div>
+              </form>}
           </div>
         </Modal>
       </div>

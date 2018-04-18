@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import {asyncCastVoteOnComment, removeComment} from "../actions";
 import {deleteComment} from '../utils/PostsAPI';
-import CreateComment from './CreateComment.js';
+import EditComment from './EditComment.js';
 
 
 class Comment extends React.Component {
@@ -30,7 +30,7 @@ class Comment extends React.Component {
     return (
       <div className="comment">
         <div className='links'>
-          <CreateComment postId={postId} comment={comment}/>|
+          <EditComment postId={postId} comment={comment}/>|
           <a href='javascript:void(0)' onClick={() => this.handleDelete(comment.parentId, comment.id)}>delete</a>
         </div>
         <div className="author">{comment.author}</div>
