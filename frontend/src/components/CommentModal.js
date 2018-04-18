@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import Loading from 'react-loading'
-import {connect} from 'react-redux';
-import {updateComment} from '../utils/PostsAPI';
-import {editComment} from "../actions";
+import Loading from 'react-loading';
 
-class EditComment extends Component {
+class CommentModal extends Component {
   state = {
     modalOpen: false,
     savingComment: false,
@@ -13,7 +10,6 @@ class EditComment extends Component {
     formAuthor: '',
     formPristine: true
   }
-
   handleModalOpen = () => {
     const {comment} = this.props;
     this.setState(() => ({
@@ -42,19 +38,7 @@ class EditComment extends Component {
 
     this.setState(() => ({ savingComment: true }))
 
-    let newComment = this.props.comment;
-    newComment.timestamp = (new Date()).getTime();
-    newComment.author = this.state.formAuthor;
-    newComment.body = this.state.formBody;
-
-    updateComment(newComment)
-      .then(() => {
-        this.setState(() => ({
-          modalOpen: false,
-          savingComment: false,
-        }));
-        this.props.dispatch(editComment({comment: newComment, postId: newComment.parentId}));
-      })
+    // this.props.onModalSubmit({formAuthor: this.state.formAuthor, formBody: this.state.formBody});
 
   }
   render() {
@@ -111,4 +95,4 @@ class EditComment extends Component {
   }
 
 }
-export default connect()(EditComment)
+export default CommentModal;

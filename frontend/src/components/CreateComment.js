@@ -61,17 +61,11 @@ class CreateComment extends Component {
 
     return (
       <div className='create-comment-wrapper'>
-        {comment !== undefined
-        ?<a
-          href='javascript:void(0)'
-          onClick={()=>this.handleModalOpen()}>
-          edit
-        </a>
-        :<button
+        <button
           onClick={()=>this.handleModalOpen()}
           className='leave-comment'>
           Leave a comment!
-        </button>}
+        </button>
         <Modal
           className='modal'
           overlayClassName='overlay'
