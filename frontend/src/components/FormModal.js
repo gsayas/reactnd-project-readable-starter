@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Loading from 'react-loading';
 
-class CommentModal extends Component {
+class FormModal extends Component {
   state = {
     modalOpen: false,
     savingComment: false,
@@ -10,14 +10,16 @@ class CommentModal extends Component {
     formAuthor: '',
     formPristine: true
   }
+
   handleModalOpen = () => {
     const {comment} = this.props;
     this.setState(() => ({
       modalOpen: true,
-      formAuthor: comment.author,
-      formBody: comment.body
+      formAuthor: comment !== undefined ? comment.author : '',
+      formBody: comment !== undefined ? comment.body : ''
     }));
   }
+
   handleModalClose = () => {
     this.setState(() => ({
       modalOpen: false,
@@ -25,33 +27,38 @@ class CommentModal extends Component {
       formBody: ''
     }));
   }
+
   handleChange = (newState) => {
     this.setState(newState);
   }
-  handleSubmitComment = (e) => {
-    // if (!this.input.value) {
-    //   return
-    // }
-    //TODO: Validate form here
 
-    e.preventDefault();
-
-    this.setState(() => ({ savingComment: true }))
-
-    // this.props.onModalSubmit({formAuthor: this.state.formAuthor, formBody: this.state.formBody});
-
+  componentDidMount() {
+    this.props.onRef(this)
   }
+
+  handleSubmitComment = (e) => {
+    e.preventDefault();
+    this.setState(() => ({ savingComment: true }))
+    this.props.onModalSubmit({formAuthor: this.state.formAuthor, formBody: this.state.formBody});
+  }
+
   render() {
     const {modalOpen, savingComment} = this.state;
-    const {comment} = this.props;
+    const {editMode, title} = this.props;
 
     return (
       <div className='create-comment-wrapper'>
-        <a
-          href='javascript:void(0)'
-          onClick={()=>this.handleModalOpen()}>
-          edit
-        </a>
+        {editMode
+        ? <a
+            href='javascript:void(0)'
+            onClick={()=>this.handleModalOpen()}>
+            edit
+          </a>
+        : <button
+            onClick={()=>this.handleModalOpen()}
+            className='leave-comment'>
+            Leave a comment!
+          </button>}
         <Modal
           className='modal'
           overlayClassName='overlay'
@@ -64,10 +71,10 @@ class CommentModal extends Component {
               ? <Loading delay={200} type='spin' color='#222' className='loading' />
               : <form onSubmit={this.handleSubmitComment}>
                 <h3 className='sub-header'>
-                  Edit comment
+                  {title}
                 </h3>
                 <div className='comment-form'>
-                  {comment === undefined
+                  {!editMode
                     ?<input
                       className='comment-author-input'
                       type='text'
@@ -95,4 +102,4 @@ class CommentModal extends Component {
   }
 
 }
-export default CommentModal;
+export default FormModal;
