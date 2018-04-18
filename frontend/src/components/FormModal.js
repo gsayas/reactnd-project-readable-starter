@@ -24,7 +24,8 @@ class FormModal extends Component {
     this.setState(() => ({
       modalOpen: false,
       formAuthor: '',
-      formBody: ''
+      formBody: '',
+      savingComment: false
     }));
   }
 

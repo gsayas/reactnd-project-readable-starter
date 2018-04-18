@@ -8,15 +8,15 @@ class EditComment extends Component {
 
   onModalSubmit = (modalData) => {
 
-    let newComment = this.props.comment;
-    newComment.timestamp = (new Date()).getTime();
-    newComment.author = modalData.formAuthor;
-    newComment.body = modalData.formBody;
+    let updatedComment = this.props.comment;
+    updatedComment.timestamp = (new Date()).getTime();
+    updatedComment.author = modalData.formAuthor;
+    updatedComment.body = modalData.formBody;
 
-    updateComment(newComment)
+    updateComment(updatedComment)
       .then(() => {
         this.modal.handleModalClose();
-        this.props.dispatch(editComment({comment: newComment, postId: newComment.parentId}));
+        this.props.dispatch(editComment({comment: updatedComment, postId: updatedComment.parentId}));
       })
   }
 
