@@ -35,10 +35,6 @@ body {
     background-color: rgba(255, 255, 255, 0.75);
 }
 
-/*.comment-form {
-    margin: auto;
-}*/
-
 .comment-form input,
 .comment-form textarea,
 .comment-form button{
@@ -46,6 +42,7 @@ body {
     margin-top: 15px;
 }
 
-.create-comment-wrapper{
+.edit-post-wrapper,
+.edit-comment-wrapper{
     display: inline;
 }

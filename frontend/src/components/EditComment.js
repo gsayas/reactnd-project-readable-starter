@@ -24,7 +24,12 @@ class EditComment extends Component {
     const {comment} = this.props;
 
     return (
-      <div className='create-comment-wrapper'>
+      <div className='edit-comment-wrapper'>
+        <a
+          href='javascript:void(0)'
+          onClick={()=>this.modal.handleModalOpen()}>
+          edit
+        </a>
         <FormModal
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}

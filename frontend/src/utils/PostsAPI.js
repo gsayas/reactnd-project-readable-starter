@@ -36,6 +36,35 @@ export const vote = (entityType, entityId, vote) =>
     body: JSON.stringify({option: vote ? 'upVote' : 'downVote'})
   }).then(res => res.json())
 
+export const savePost = (post) =>
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({...post})
+  }).then(res => res.json())
+
+export const updatePost = (post) =>
+  fetch(`${api}/posts/${post.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({...post})
+  }).then(res => res.json())
+
+export const deletePost = (postId) =>
+  fetch(`${api}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  }).then(res => res.json())
+
 export const saveComment = (comment) =>
   fetch(`${api}/comments`, {
     method: 'POST',
@@ -68,26 +97,3 @@ export const deleteComment = (commentId) =>
 export const getUUID = () => {
   return Math.random().toString(36).substring(2)+(new Date()).getTime().toString(36);
 }
-
-/*
-export const update = (book, shelf) =>
-  fetch(`${api}/books/${book.id}`, {
-    method: 'PUT',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ shelf })
-  }).then(res => res.json())
-
-export const search = (query) =>
-  fetch(`${api}/search`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ query })
-  }).then(res => res.json())
-    .then(data => data.books)
-*/

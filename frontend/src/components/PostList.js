@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Post from './Post.js';
 import {fetchPosts, toggleOrder} from "../actions";
 import sortBy from 'sort-by';
+import CreatePost from './CreatePost.js';
 
 class PostList extends React.Component {
 
@@ -25,6 +26,7 @@ class PostList extends React.Component {
           <a href='javascript:void(0)' onClick={() => this.handleOrdering('voteScore')}>score</a>|
           <a href='javascript:void(0)' onClick={() => this.handleOrdering('timestamp')}>date</a>
         </span>
+        <CreatePost/>
         <ul className="post-list">
           {posts && posts.map((post) => (
             <li key={post.id}>

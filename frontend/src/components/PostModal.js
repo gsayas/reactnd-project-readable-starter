@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Loading from 'react-loading';
 
-class FormModal extends Component {
+class PostModal extends Component {
   state = {
     modalOpen: false,
-    savingComment: false,
+    isSavingForm: false,
     formBody: '',
     formAuthor: '',
+    formTitle: '',
     formPristine: true
   }
 
   handleModalOpen = () => {
-    const {comment} = this.props;
+    const {post} = this.props;
     this.setState(() => ({
       modalOpen: true,
-      formAuthor: comment !== undefined ? comment.author : '',
-      formBody: comment !== undefined ? comment.body : ''
+      formAuthor: post !== undefined ? post.author : '',
+      formBody: post !== undefined ? post.body : '',
+      formTitle: post !== undefined ? post.title : ''
     }));
   }
 
@@ -25,6 +27,7 @@ class FormModal extends Component {
       modalOpen: false,
       formAuthor: '',
       formBody: '',
+      formTitle: '',
       isSavingForm: false
     }));
   }
@@ -37,18 +40,18 @@ class FormModal extends Component {
     this.props.onRef(this)
   }
 
-  handleSubmitComment = (e) => {
+  handleSubmitForm = (e) => {
     e.preventDefault();
     this.setState(() => ({ isSavingForm: true }))
-    this.props.onModalSubmit({formAuthor: this.state.formAuthor, formBody: this.state.formBody});
+    this.props.onModalSubmit({formAuthor: this.state.formAuthor, formBody: this.state.formBody, formTitle: this.state.formTitle});
   }
 
   render() {
-    const {modalOpen, savingComment} = this.state;
+    const {modalOpen, isSavingForm} = this.state;
     const {isEditMode, title} = this.props;
 
     return (
-      <div className='create-comment-wrapper'>
+      <div className='post-form-wrapper'>
         <Modal
           className='modal'
           overlayClassName='overlay'
@@ -57,30 +60,37 @@ class FormModal extends Component {
           contentLabel='Modal'
         >
           <div>
-            {savingComment === true
+            {isSavingForm === true
               ? <Loading delay={200} type='spin' color='#222' className='loading' />
-              : <form onSubmit={this.handleSubmitComment}>
+              : <form onSubmit={this.handleSubmitForm}>
                 <h3 className='sub-header'>
                   {title}
                 </h3>
-                <div className='comment-form'>
+                <div className='post-form'>
                   {!isEditMode
                     ?<input
-                      className='comment-author-input'
+                      className='post-author-input'
                       type='text'
                       placeholder='Author'
                       value={this.state.formAuthor}
                       onChange={(event)=>this.handleChange({formAuthor: event.target.value})}
                     />:''}
+                  <input
+                    className='post-title-input'
+                    type='text'
+                    placeholder='Title'
+                    value={this.state.formTitle}
+                    onChange={(event)=>this.handleChange({formTitle: event.target.value})}
+                  />
                   <textarea
                     rows="4"
                     cols="30"
-                    className='comment-body-input'
-                    placeholder='Insert your comment here'
+                    className='post-body-input'
+                    placeholder='post here!'
                     value={this.state.formBody}
                     onChange={(event)=>this.handleChange({formBody: event.target.value})}
                   />
-                  <button type="submit" disabled={false || savingComment}>{/*TODO: disable submit if form is empty*/}
+                  <button type="submit" disabled={false || isSavingForm}>{/*TODO: disable submit if form is empty*/}
                     Submit
                   </button>
                 </div>
@@ -92,4 +102,4 @@ class FormModal extends Component {
   }
 
 }
-export default FormModal;
+export default PostModal;

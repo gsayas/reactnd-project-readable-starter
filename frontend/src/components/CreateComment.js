@@ -8,13 +8,13 @@ class CreateComment extends Component {
 
   onModalSubmit = (modalData) => {
 
-    this.setState(() => ({ savingComment: true }))
+    this.setState(() => ({ isSavingForm: true }))
 
     let newComment = {};
     newComment.id = getUUID();
     newComment.parentId = this.props.postId;
     newComment.timestamp = (new Date()).getTime();
-    newComment.author = modalData.formAuthor;
+    newComment.author = modalData.formAuthor;//TODO: create getters
     newComment.body = modalData.formBody;
 
     saveComment(newComment)
@@ -29,6 +29,11 @@ class CreateComment extends Component {
 
     return (
       <div className='create-comment-wrapper'>
+        <button
+          onClick={()=>this.modal.handleModalOpen()}
+          className='leave-comment'>
+          Leave a comment!
+        </button>
         <FormModal
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}

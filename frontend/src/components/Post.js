@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {asyncCastVoteOnPost} from "../actions";
+import {asyncCastVoteOnPost, removePost} from "../actions";
+import EditPost from './EditPost.js';
+import {deletePost} from "../utils/PostsAPI";
 
 
 class Post extends React.Component {
@@ -14,12 +16,25 @@ class Post extends React.Component {
     this.props.dispatch(asyncCastVoteOnPost({postId: postId, vote: vote}));
   };
 
+  handleDelete = (postId) => {
+    if(window.confirm('Are you sure to delete this post?')){
+      deletePost(postId)
+        .then(() => {
+          this.props.dispatch(removePost({postId}));
+        })
+    }
+  };
+
   render() {
     const {listing, post} = this.props;
     // console.log('rendering post');
 
     return (
       <div className="post">
+        <div className='links'>
+          <EditPost post={post}/>|
+          <a href='javascript:void(0)' onClick={() => this.handleDelete(post.id)}>delete</a>
+        </div>
         <h3><Link to={'/post/' + post.id}>{post.title}</Link></h3>
         <div className="author">{post.author}</div>
         <div className="post-body">{post.body}</div>

@@ -123,18 +123,24 @@ function postsReducer (state = initialPostsState, action) {
           action.post
         ],
       }
-    /*case UPDATE_POST_COMMENT_COUNT:
-      return {
-        ...state,
-        posts: updateCommentCountForPost(state.posts, action.postId, action.addOrRemove)
-      }
+    case Actions.ADD_POST:
       return {
         ...state,
         posts: [
           ...state.posts,
           action.post
         ],
-      }*/
+      }
+    case Actions.EDIT_POST:
+      return {
+        ...state,
+        posts: updateBodyForEntity(state.posts, action.post.id, action.post.body)
+      }
+    case Actions.REMOVE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((item) => item.id !== action.postId)
+      }
     case Actions.TOGGLE_ORDER:
       return {
         ...state,
