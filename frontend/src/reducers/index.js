@@ -45,7 +45,7 @@ function commentsReducer(state = initialCommentsState, action) {
 
 //an entity here can be either a Post or a Comment
 function updateBodyForEntity(entities, entityId, entityBody) {
-
+  console.log(entities);
   const entityIndex = entities.findIndex((item) => (item.id === entityId));
 
   return entities.map( (entity, index) => {
@@ -116,6 +116,7 @@ function postsReducer (state = initialPostsState, action) {
         posts: action.posts,
       }
     case Actions.LOAD_POST:
+      console.log('loading post'+ action.post.title);
       return {
         ...state,
         posts: [

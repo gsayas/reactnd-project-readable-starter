@@ -8,7 +8,7 @@ class EditPost extends Component {
 
   onModalSubmit = (modalData) => {
 
-    let updatedPost = this.props.post;
+    let updatedPost = this.props.post;//TODO: objects in redux store shouldn't be modified directly
     updatedPost.timestamp = (new Date()).getTime();
     updatedPost.author = modalData.formAuthor;
     updatedPost.body = modalData.formBody;
