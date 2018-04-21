@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {updatePost} from '../utils/PostsAPI';
 import {editPost} from "../actions";
-import PostModal from "./PostModal";
+import ModalForm from "./ModalForm.js";
 
 class EditPost extends Component {
 
@@ -10,9 +10,9 @@ class EditPost extends Component {
 
     let updatedPost = this.props.post;//TODO: objects in redux store shouldn't be modified directly
     updatedPost.timestamp = (new Date()).getTime();
-    updatedPost.author = modalData.formAuthor;
-    updatedPost.body = modalData.formBody;
-    updatedPost.title = modalData.formTitle;
+    updatedPost.author = modalData.author;
+    updatedPost.body = modalData.body;
+    updatedPost.title = modalData.title;
 
     updatePost(updatedPost)
       .then(() => {
@@ -31,12 +31,13 @@ class EditPost extends Component {
           onClick={()=>this.modal.handleModalOpen()}>
           edit
         </a>
-        <PostModal
+        <ModalForm
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}
-          post={post}
+          entity={post}
           title='Edit Post'
           isEditMode={true}
+          showTitleField={true}
         />
       </div>
     )

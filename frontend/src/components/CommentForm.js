@@ -2,23 +2,21 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Loading from 'react-loading';
 
-class PostModal extends Component {
+class CommentForm extends Component {//TODO: refactor this class to extend from a more generic ModalForm
   state = {
     modalOpen: false,
-    isSavingForm: false,
+    savingComment: false,
     formBody: '',
     formAuthor: '',
-    formTitle: '',
     formPristine: true
   }
 
   handleModalOpen = () => {
-    const {post} = this.props;
+    const {comment} = this.props;
     this.setState(() => ({
       modalOpen: true,
-      formAuthor: post !== undefined ? post.author : '',
-      formBody: post !== undefined ? post.body : '',
-      formTitle: post !== undefined ? post.title : ''
+      formAuthor: comment !== undefined ? comment.author : '',
+      formBody: comment !== undefined ? comment.body : ''
     }));
   }
 
@@ -27,7 +25,6 @@ class PostModal extends Component {
       modalOpen: false,
       formAuthor: '',
       formBody: '',
-      formTitle: '',
       isSavingForm: false
     }));
   }
@@ -40,18 +37,18 @@ class PostModal extends Component {
     this.props.onRef(this)
   }
 
-  handleSubmitForm = (e) => {
+  handleSubmitComment = (e) => {
     e.preventDefault();
     this.setState(() => ({ isSavingForm: true }))
-    this.props.onModalSubmit({formAuthor: this.state.formAuthor, formBody: this.state.formBody, formTitle: this.state.formTitle});
+    this.props.onModalSubmit({formAuthor: this.state.formAuthor, formBody: this.state.formBody});
   }
 
   render() {
-    const {modalOpen, isSavingForm} = this.state;
+    const {modalOpen, savingComment} = this.state;
     const {isEditMode, title} = this.props;
 
     return (
-      <div className='post-form-wrapper'>
+      <div className='create-comment-wrapper'>
         <Modal
           className='modal'
           overlayClassName='overlay'
@@ -60,37 +57,30 @@ class PostModal extends Component {
           contentLabel='Modal'
         >
           <div>
-            {isSavingForm === true
+            {savingComment === true
               ? <Loading delay={200} type='spin' color='#222' className='loading' />
-              : <form onSubmit={this.handleSubmitForm}>
+              : <form onSubmit={this.handleSubmitComment}>
                 <h3 className='sub-header'>
                   {title}
                 </h3>
-                <div className='post-form'>
+                <div className='comment-form'>
                   {!isEditMode
                     ?<input
-                      className='post-author-input'
+                      className='comment-author-input'
                       type='text'
                       placeholder='Author'
                       value={this.state.formAuthor}
                       onChange={(event)=>this.handleChange({formAuthor: event.target.value})}
                     />:''}
-                  <input
-                    className='post-title-input'
-                    type='text'
-                    placeholder='Title'
-                    value={this.state.formTitle}
-                    onChange={(event)=>this.handleChange({formTitle: event.target.value})}
-                  />
                   <textarea
                     rows="4"
                     cols="30"
-                    className='post-body-input'
-                    placeholder='post here!'
+                    className='comment-body-input'
+                    placeholder='Insert your comment here'
                     value={this.state.formBody}
                     onChange={(event)=>this.handleChange({formBody: event.target.value})}
                   />
-                  <button type="submit" disabled={false || isSavingForm}>{/*TODO: disable submit if form is empty*/}
+                  <button type="submit" disabled={false || savingComment}>{/*TODO: disable submit if form is empty*/}
                     Submit
                   </button>
                 </div>
@@ -102,4 +92,4 @@ class PostModal extends Component {
   }
 
 }
-export default PostModal;
+export default CommentForm;

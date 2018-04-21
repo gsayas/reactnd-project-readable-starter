@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {saveComment, getUUID} from '../utils/PostsAPI';
+import {saveComment, getUUID} from '../utils/PostsAPI.js';
 import {addComment} from "../actions";
-import FormModal from "./FormModal";
+import ModalForm from "./ModalForm.js";
 
 class CreateComment extends Component {
 
@@ -14,8 +14,8 @@ class CreateComment extends Component {
     newComment.id = getUUID();
     newComment.parentId = this.props.postId;
     newComment.timestamp = (new Date()).getTime();
-    newComment.author = modalData.formAuthor;//TODO: create getters
-    newComment.body = modalData.formBody;
+    newComment.author = modalData.author;
+    newComment.body = modalData.body;
 
     saveComment(newComment)
       .then((savedComment) => {
@@ -34,12 +34,13 @@ class CreateComment extends Component {
           className='leave-comment'>
           Leave a comment!
         </button>
-        <FormModal
+        <ModalForm
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}
-          comment={comment}
+          entity={comment}
           title='Add New Comment'
           editMode={false}
+          showTitleField={false}
         />
       </div>
     )

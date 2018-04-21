@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {savePost, getUUID} from '../utils/PostsAPI';
 import {addPost} from "../actions";
-import PostModal from "./PostModal";
+import ModalForm from "./ModalForm.js";
 
 class CreatePost extends Component {
 
@@ -11,9 +11,9 @@ class CreatePost extends Component {
     let newPost = {};
     newPost.id = getUUID();
     newPost.timestamp = (new Date()).getTime();
-    newPost.author = modalData.formAuthor;
-    newPost.body = modalData.formBody;
-    newPost.title = modalData.formTitle;
+    newPost.author = modalData.author;
+    newPost.body = modalData.body;
+    newPost.title = modalData.title;
 
     savePost(newPost)
       .then((savedPost) => {
@@ -32,12 +32,13 @@ class CreatePost extends Component {
           className='add-post'>
           Add a new Post
         </button>
-        <PostModal
+        <ModalForm
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}
-          post={post}
+          entity={post}
           title='Add new Post'
           isEditMode={false}
+          showTitleField={true}
         />
       </div>
     )

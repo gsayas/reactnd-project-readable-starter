@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {updateComment} from '../utils/PostsAPI';
+import {updateComment} from '../utils/PostsAPI.js';
 import {editComment} from "../actions";
-import FormModal from "./FormModal";
+import ModalForm from "./ModalForm.js";
 
 class EditComment extends Component {
 
@@ -10,8 +10,8 @@ class EditComment extends Component {
 
     let updatedComment = this.props.comment;
     updatedComment.timestamp = (new Date()).getTime();
-    updatedComment.author = modalData.formAuthor;
-    updatedComment.body = modalData.formBody;
+    updatedComment.author = modalData.author;
+    updatedComment.body = modalData.body;
 
     updateComment(updatedComment)
       .then(() => {
@@ -30,12 +30,13 @@ class EditComment extends Component {
           onClick={()=>this.modal.handleModalOpen()}>
           edit
         </a>
-        <FormModal
+        <ModalForm
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}
-          comment={comment}
+          entity={comment}
           title='Edit Comment'
           isEditMode={true}
+          showTitleField={false}
         />
       </div>
     )
