@@ -9,6 +9,11 @@ body {
     margin-bottom: 30px;
 }
 
+.post h3,
+.comment h3{
+    margin: 0;
+}
+
 .modal {
     position: absolute;
     top: 40px;
@@ -43,6 +48,14 @@ body {
 }
 
 .edit-post-wrapper,
-.edit-comment-wrapper{
+.edit-comment-wrapper,
+.modal-form-wrapper{
     display: inline;
+}
+
+.modal-form input,
+.modal-form textarea{
+    display: block;
+    margin-bottom: 15px;
+    min-width: 320px;
 }

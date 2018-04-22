@@ -66,7 +66,7 @@ class ModalForm extends Component {
                 <h3 className='sub-header'>
                   {title}
                 </h3>
-                <div className='form'>
+                <div className='modal-form'>
                   {!isEditMode
                     ?<input
                       className='author-input'
