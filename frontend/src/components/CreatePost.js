@@ -14,6 +14,7 @@ class CreatePost extends Component {
     newPost.author = modalData.author;
     newPost.body = modalData.body;
     newPost.title = modalData.title;
+    newPost.category = modalData.category;
 
     savePost(newPost)
       .then((savedPost) => {

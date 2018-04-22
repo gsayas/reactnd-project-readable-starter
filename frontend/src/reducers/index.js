@@ -110,6 +110,11 @@ function postsReducer (state = initialPostsState, action) {
         ...state,
         posts: updateCommentCountForPost(state.posts, action.postId, false)
       }
+    case Actions.LOAD_CATEGORIES:
+      return {
+        ...state,
+        categories: action.categories,
+      }
     case Actions.LOAD_POSTS:
       return {
         ...state,

@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from "react-redux";
+import { withRouter } from 'react-router-dom'
 import Post from './Post.js';
-import {fetchPosts, toggleOrder} from "../actions";
+import {fetchPosts, loadCategories, toggleOrder} from "../actions";
 import sortBy from 'sort-by';
 import CreatePost from './CreatePost.js';
+import {getCategories} from "../utils/PostsAPI";
 
 class PostList extends React.Component {
 

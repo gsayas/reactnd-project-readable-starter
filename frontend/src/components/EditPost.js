@@ -13,6 +13,7 @@ class EditPost extends Component {
     updatedPost.author = modalData.author;
     updatedPost.body = modalData.body;
     updatedPost.title = modalData.title;
+    updatedPost.category = modalData.category;
 
     updatePost(updatedPost)
       .then(() => {

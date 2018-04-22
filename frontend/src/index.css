@@ -54,7 +54,8 @@ body {
 }
 
 .modal-form input,
-.modal-form textarea{
+.modal-form textarea,
+.modal-form select{
     display: block;
     margin-bottom: 15px;
     min-width: 320px;

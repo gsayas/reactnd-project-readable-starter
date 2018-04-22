@@ -11,6 +11,7 @@ export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const EDIT_POST = 'EDIT_POST';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const REMOVE_POST = 'REMOVE_POST';
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
 
 export function castVoteOnPost ({postId, vote}) {
   return {
@@ -44,6 +45,11 @@ export const asyncCastVoteOnComment = ({postId, commentId, vote}) => dispatch =>
 export const loadPosts = posts => ({
   type: LOAD_POSTS,
   posts
+});
+
+export const loadCategories = categories => ({
+  type: LOAD_CATEGORIES,
+  categories
 });
 
 export const fetchPosts = () => dispatch => (
