@@ -41,7 +41,7 @@ class PostDetails extends React.Component {
         </div>
       );
     }else{
-      return (<div className='not-found'>Page not found</div>);
+      return (<div className='not-found'>Post not found</div>);
     }
   }
 }

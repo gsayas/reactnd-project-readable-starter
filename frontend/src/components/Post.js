@@ -35,7 +35,7 @@ class Post extends React.Component {
           <EditPost post={post}/>|
           <a href='javascript:void(0)' onClick={() => this.handleDelete(post.id)}>delete</a>
         </div>
-        <h3><Link to={'/post/' + post.id}>{post.title}</Link></h3>
+        <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
         <div className="author">{post.author}</div>
         <div className="post-body">{post.body}</div>
         <div className="post-commentsCount"># of comments: {post.commentCount}</div>

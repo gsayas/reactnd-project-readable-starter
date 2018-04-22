@@ -120,7 +120,9 @@ class ModalForm extends Component {
 }
 
 function mapStateToProps ({postsReducer}) {
-  return {categories: postsReducer.categories};
+  return {
+    categories: postsReducer.categories
+  };
 }
 
 export default connect(mapStateToProps)(ModalForm);

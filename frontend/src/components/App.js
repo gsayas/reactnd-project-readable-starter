@@ -22,7 +22,12 @@ class App extends Component {
        <Route exact path='/' render={() => (
           <PostList />
        )}/>
-       <Route path='/post/:id' render={(props) => (
+        <Route exact path='/:category' render={(props) => (
+          <PostList
+            category={props.match.params.category}
+          />
+        )}/>
+       <Route exact path='/:category/:id' render={(props) => (
          <PostDetails
            postId={props.match.params.id}
          />
