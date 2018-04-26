@@ -3,20 +3,21 @@ import {connect} from 'react-redux';
 import {updateComment} from '../utils/PostsAPI.js';
 import {editComment} from "../actions";
 import ModalForm from "./ModalForm.js";
+import {getUUID} from "../utils/PostsAPI";
 
 class EditComment extends Component {
 
   onModalSubmit = (modalData) => {
 
-    let updatedComment = this.props.comment;
-    updatedComment.timestamp = (new Date()).getTime();
-    updatedComment.author = modalData.author;
-    updatedComment.body = modalData.body;
+    let commentUpdater = {};
+    commentUpdater.id = this.props.comment.id;
+    commentUpdater.timestamp = (new Date()).getTime();
+    commentUpdater.body = modalData.body;
 
-    updateComment(updatedComment)
+    updateComment(commentUpdater)
       .then(() => {
         this.modal.handleModalClose();
-        this.props.dispatch(editComment({comment: updatedComment, postId: updatedComment.parentId}));
+        this.props.dispatch(editComment({comment: commentUpdater, postId: this.props.postId}));
       })
   }
 

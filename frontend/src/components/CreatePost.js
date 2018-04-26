@@ -8,15 +8,15 @@ class CreatePost extends Component {
 
   onModalSubmit = (modalData) => {
 
-    let newPost = {};
-    newPost.id = getUUID();
-    newPost.timestamp = (new Date()).getTime();
-    newPost.author = modalData.author;
-    newPost.body = modalData.body;
-    newPost.title = modalData.title;
-    newPost.category = modalData.category;
+    let postCreator = {};
+    postCreator.id = getUUID();
+    postCreator.timestamp = (new Date()).getTime();
+    postCreator.author = modalData.author;
+    postCreator.body = modalData.body;
+    postCreator.title = modalData.title;
+    postCreator.category = modalData.category;
 
-    savePost(newPost)
+    savePost(postCreator)
       .then((savedPost) => {
         this.modal.handleModalClose();
         this.props.dispatch(addPost({post: savedPost}));

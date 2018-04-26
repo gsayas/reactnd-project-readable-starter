@@ -9,13 +9,19 @@ class CommentList extends React.Component {
 
   componentDidMount(){
     this.props.dispatch(fetchComments(this.props.postId));
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    //sort comments when they are first loaded into the component
+    if (this.props.comments[nextProps.postId] === undefined && nextProps.comments[nextProps.postId] !== undefined ) {
+      nextProps.comments[nextProps.postId].sort(sortBy('-voteScore'));
+    }
   }
 
   render() {
     const globalComments = this.props.comments;
     const comments = globalComments[this.props.postId];
-
-    comments && comments.sort(sortBy('-voteScore'));//TODO: move to componentWillReceiveProps
 
     return (
       <div className="comment-list-wrapper">

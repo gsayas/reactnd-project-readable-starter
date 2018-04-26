@@ -8,17 +8,17 @@ class EditPost extends Component {
 
   onModalSubmit = (modalData) => {
 
-    let updatedPost = this.props.post;//TODO: objects in redux store shouldn't be modified directly
-    updatedPost.timestamp = (new Date()).getTime();
-    updatedPost.author = modalData.author;
-    updatedPost.body = modalData.body;
-    updatedPost.title = modalData.title;
-    updatedPost.category = modalData.category;
+    let postUpdater = {};
+    postUpdater.id = this.props.post.id;
+    postUpdater.timestamp = (new Date()).getTime();
+    postUpdater.body = modalData.body;
+    postUpdater.title = modalData.title;
+    postUpdater.category = modalData.category;
 
-    updatePost(updatedPost)
+    updatePost(postUpdater)
       .then(() => {
         this.modal.handleModalClose();
-        this.props.dispatch(editPost({post: updatedPost}));
+        this.props.dispatch(editPost({post: postUpdater}));
       })
   }
 

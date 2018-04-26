@@ -10,14 +10,14 @@ class CreateComment extends Component {
 
     this.setState(() => ({ isSavingForm: true }))
 
-    let newComment = {};
-    newComment.id = getUUID();
-    newComment.parentId = this.props.postId;
-    newComment.timestamp = (new Date()).getTime();
-    newComment.author = modalData.author;
-    newComment.body = modalData.body;
+    let commentCreator = {};
+    commentCreator.id = getUUID();
+    commentCreator.parentId = this.props.postId;
+    commentCreator.timestamp = (new Date()).getTime();
+    commentCreator.author = modalData.author;
+    commentCreator.body = modalData.body;
 
-    saveComment(newComment)
+    saveComment(commentCreator)
       .then((savedComment) => {
         this.modal.handleModalClose();
         this.props.dispatch(addComment({comment: savedComment, postId: this.props.postId}));

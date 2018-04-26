@@ -5,8 +5,9 @@ import PostDetails from './PostDetails.js';
 import {connect} from "react-redux";
 import Modal from 'react-modal';
 import '../App.css';
-import {fetchPosts, loadCategories} from "../actions";
+import {loadCategories} from "../actions";
 import {getCategories} from "../utils/PostsAPI";
+import CategoryList from "./CategoryList";
 //TODO: optimize imports
 
 class App extends Component {
@@ -19,14 +20,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+       <CategoryList categories={this.props.categories}/>
        <Route exact path='/' render={() => (
-          <PostList />
+         <PostList />
        )}/>
-        <Route exact path='/:category' render={(props) => (
-          <PostList
-            category={props.match.params.category}
-          />
-        )}/>
+       <Route exact path='/:category' render={(props) => (
+         <PostList
+           category={props.match.params.category}
+         />
+       )}/>
        <Route exact path='/:category/:id' render={(props) => (
          <PostDetails
            postId={props.match.params.id}
@@ -38,4 +40,10 @@ class App extends Component {
 }
 Modal.setAppElement('#root');
 
-export default withRouter(connect()(App));
+function mapStateToProps ({postsReducer}) {
+  return {
+    categories: postsReducer.categories
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(App));

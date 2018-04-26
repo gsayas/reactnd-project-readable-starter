@@ -31,7 +31,7 @@ function commentsReducer(state = initialCommentsState, action) {
     case Actions.EDIT_COMMENT:
       return {
         ...state,
-        [action.postId]: updateBodyForEntity(state[action.postId], action.comment.id, action.comment.body)
+        [action.postId]: updateComment(state[action.postId], action.comment.id, action.comment)
       }
     case Actions.REMOVE_COMMENT:
       return {
@@ -44,8 +44,7 @@ function commentsReducer(state = initialCommentsState, action) {
 }
 
 //an entity here can be either a Post or a Comment
-function updateBodyForEntity(entities, entityId, entityBody) {
-  console.log(entities);
+function updateComment(entities, entityId, commentUpdater) {
   const entityIndex = entities.findIndex((item) => (item.id === entityId));
 
   return entities.map( (entity, index) => {
@@ -54,7 +53,26 @@ function updateBodyForEntity(entities, entityId, entityBody) {
     }
     return {
       ...entity,
-      body: entityBody
+      body: commentUpdater.body,
+      timestamp: commentUpdater.timestamp,
+    };
+  });
+}
+
+//an entity here can be either a Post or a Comment
+function updatePost(entities, entityId, postUpdater) {
+  const entityIndex = entities.findIndex((item) => (item.id === entityId));
+
+  return entities.map( (entity, index) => {
+    if(index !== entityIndex) {
+      return entity;
+    }
+    return {
+      ...entity,
+      body: postUpdater.body,
+      title: postUpdater.title,
+      category: postUpdater.category,
+      timestamp: postUpdater.timestamp
     };
   });
 }
@@ -121,7 +139,6 @@ function postsReducer (state = initialPostsState, action) {
         posts: action.posts,
       }
     case Actions.LOAD_POST:
-      console.log('loading post'+ action.post.title);
       return {
         ...state,
         posts: [
@@ -140,7 +157,7 @@ function postsReducer (state = initialPostsState, action) {
     case Actions.EDIT_POST:
       return {
         ...state,
-        posts: updateBodyForEntity(state.posts, action.post.id, action.post.body)
+        posts: updatePost(state.posts, action.post.id, action.post)
       }
     case Actions.REMOVE_POST:
       return {

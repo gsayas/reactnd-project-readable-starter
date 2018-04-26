@@ -25,10 +25,18 @@ class PostList extends React.Component {
         this.setState({ categoryFound: false })
       }
     }
+
+    console.log(this.props);
+    console.log(nextProps);
+    //sort posts when they are first loaded into the component, or when orderBy changes
+    if( (this.props.posts.length === 0 && nextProps.posts.length > 0) ||
+        (this.props.orderBy !== nextProps.orderBy) ) {
+        nextProps.posts.sort(sortBy(nextProps.orderBy));
+    }
   }
 
   render() {
-    const {posts, orderBy, category} = this.props;
+    const {posts, category} = this.props;
     let showingPosts;
 
     if(category){
@@ -37,8 +45,6 @@ class PostList extends React.Component {
       showingPosts = posts;
     }
     //TODO: show message when no posts are showing
-
-    showingPosts.sort(sortBy(orderBy));
 
     if( this.state.categoryFound === true ) {
       return (
