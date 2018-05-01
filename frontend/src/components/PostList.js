@@ -26,8 +26,6 @@ class PostList extends React.Component {
       }
     }
 
-    console.log(this.props);
-    console.log(nextProps);
     //sort posts when they are first loaded into the component, or when orderBy changes
     if( (this.props.posts.length === 0 && nextProps.posts.length > 0) ||
         (this.props.orderBy !== nextProps.orderBy) ) {
