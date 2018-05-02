@@ -38,9 +38,9 @@ class Post extends React.Component {
         <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
         <div className="author">{post.author}</div>
         <div className="post-body">{post.body}</div>
-        <div className="post-commentsCount"># of comments: {post.commentCount}</div>
+        <div className="post-commentsCount"># of comments: <span class="badge badge-pill">{post.commentCount}</span></div>
         <div className="votes-wrapper">
-          <span className="vote-count">Votes: {post.voteScore}</span>
+          <span className="vote-count">Votes: <span class="badge badge-pill">{post.voteScore}</span></span>
           <button onClick={() => this.handleVote(post.id, true)} className='up-vote'>
             +
           </button>

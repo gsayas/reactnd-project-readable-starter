@@ -8,7 +8,7 @@ import '../App.css';
 import {loadCategories} from "../actions";
 import {getCategories} from "../utils/PostsAPI";
 import CategoryList from "./CategoryList";
-//import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import { Navbar, Jumbotron, Grid, Button } from 'react-bootstrap';
 //TODO: optimize imports
 
 class App extends Component {
@@ -22,19 +22,23 @@ class App extends Component {
     return (
       <div className="App">
        <CategoryList categories={this.props.categories}/>
-       <Route exact path='/' render={() => (
-         <PostList />
-       )}/>
-       <Route exact path='/:category' render={(props) => (
-         <PostList
-           category={props.match.params.category}
-         />
-       )}/>
-       <Route exact path='/:category/:id' render={(props) => (
-         <PostDetails
-           postId={props.match.params.id}
-         />
-       )}/>
+       <Jumbotron>
+         <Grid>
+           <Route exact path='/' render={() => (
+             <PostList />
+           )}/>
+           <Route exact path='/:category' render={(props) => (
+             <PostList
+               category={props.match.params.category}
+             />
+           )}/>
+           <Route exact path='/:category/:id' render={(props) => (
+             <PostDetails
+               postId={props.match.params.id}
+             />
+           )}/>
+         </Grid>
+       </Jumbotron>
       </div>
     );
   }

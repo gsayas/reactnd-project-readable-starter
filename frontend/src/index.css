@@ -1,6 +1,4 @@
 body {
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
 }
 
@@ -60,4 +58,13 @@ body {
     display: block;
     margin-bottom: 15px;
     min-width: 320px;
+}
+
+
+
+/*
+Override Bootstrap styles
+ */
+.navbar {
+    margin-bottom: 0;
 }
