@@ -25,7 +25,6 @@ class PostList extends React.Component {
         this.setState({ categoryFound: false })
       }
     }
-
     //sort posts when they are first loaded into the component, or when orderBy changes
     if( (this.props.posts.length === 0 && nextProps.posts.length > 0) ||
         (this.props.orderBy !== nextProps.orderBy) ) {

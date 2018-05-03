@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import {asyncCastVoteOnComment, removeComment} from "../actions";
 import {deleteComment} from '../utils/PostsAPI';
 import EditComment from './EditComment.js';
+import {timeAgoFormat} from "../utils/helpers";
+import ThumbsUp from 'react-icons/lib/fa/thumbs-up';
+import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
 
 
 class Comment extends React.Component {
@@ -25,26 +28,29 @@ class Comment extends React.Component {
   };
 
   render() {
-    const {comment, postId} = this.props;
+    const {comment} = this.props;
+    // console.log(postId);
 
     return (
       <div className="comment">
         <div className='links'>
-          <EditComment postId={postId} comment={comment}/>|
+          <EditComment postId={comment.parentId} comment={comment}/>|
           <a href='javascript:void(0)' onClick={() => this.handleDelete(comment.parentId, comment.id)}>delete</a>
         </div>
-        <div className="author">{comment.author}</div>
         <div className="comment-body">{comment.body}</div>
-        <div className="votes-wrapper">
-          <span className="vote-count">Votes: {comment.voteScore}</span>
-          <button onClick={() => this.handleVote(comment.parentId, comment.id, true)} className='up-vote'>
-            +
-          </button>
-          <button onClick={() => this.handleVote(comment.parentId, comment.id, false)} className='down-vote'>
-            -
-          </button>
+        <div className="comment-meta">
+          <span className="author">by <strong>{comment.author}</strong> </span>
+          <span className="comment-timestamp">{timeAgoFormat(comment.timestamp)} </span>
+          <span className="votes-wrapper">
+            <button onClick={() => this.handleVote(comment.parentId, comment.id, true)} className='up-vote'>
+              <ThumbsUp />
+            </button>
+            <button onClick={() => this.handleVote(comment.parentId, comment.id, false)} className='down-vote'>
+              <ThumbsDown />
+            </button>
+            {' ' + comment.voteScore}
+          </span>
         </div>
-        <div className="comment-timestamp">{(new Date(comment.timestamp)).toDateString()}</div>
       </div>
     )
   }

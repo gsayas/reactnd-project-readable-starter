@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import {asyncCastVoteOnPost, removePost} from "../actions";
 import EditPost from './EditPost.js';
 import {deletePost} from "../utils/PostsAPI";
+import CommentsIcon from 'react-icons/lib/fa/comments';
+import ThumbsUp from 'react-icons/lib/fa/thumbs-up';
+import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
+import {timeAgoFormat} from "../utils/helpers";
 
 
 class Post extends React.Component {
@@ -36,19 +40,22 @@ class Post extends React.Component {
           <a href='javascript:void(0)' onClick={() => this.handleDelete(post.id)}>delete</a>
         </div>
         <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
-        <div className="author">{post.author}</div>
         <div className="post-body">{post.body}</div>
-        <div className="post-commentsCount"># of comments: <span class="badge badge-pill">{post.commentCount}</span></div>
-        <div className="votes-wrapper">
-          <span className="vote-count">Votes: <span class="badge badge-pill">{post.voteScore}</span></span>
-          <button onClick={() => this.handleVote(post.id, true)} className='up-vote'>
-            +
-          </button>
-          <button onClick={() => this.handleVote(post.id, false)} className='down-vote'>
-            -
-          </button>
+        <div className="post-meta">
+          <span className="author">by <strong>{post.author}</strong> </span>
+          <span className="post-timestamp">{timeAgoFormat(post.timestamp)} </span>
+          <span className="category">in <strong>{post.category}</strong> </span>
+          <span className="post-commentsCount"><CommentsIcon /> {post.commentCount} </span>
+          <span className="votes-wrapper">
+            <button onClick={() => this.handleVote(post.id, true)} className='up-vote'>
+              <ThumbsUp />
+            </button>
+            <button onClick={() => this.handleVote(post.id, false)} className='down-vote'>
+              <ThumbsDown />
+            </button>
+            {' ' + post.voteScore}
+          </span>
         </div>
-        <div className="post-timestamp">{(new Date(post.timestamp)).toDateString()}</div>
       </div>
     )
   }

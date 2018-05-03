@@ -24,7 +24,7 @@ class CommentList extends React.Component {
     const comments = globalComments[this.props.postId];
 
     return (
-      <div className="comment-list-wrapper">
+      <div className="comment-list-wrapper well well-lg">
         <CreateComment postId={this.props.postId}/>
         <ul className="comment-list">
           {comments && comments.map((comment) => (

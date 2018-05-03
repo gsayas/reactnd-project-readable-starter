@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {updateComment} from '../utils/PostsAPI.js';
 import {editComment} from "../actions";
 import ModalForm from "./ModalForm.js";
-import {getUUID} from "../utils/PostsAPI";
 
 class EditComment extends Component {
 
