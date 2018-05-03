@@ -42,7 +42,7 @@ class Post extends React.Component {
         <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
         <div className="post-body">{post.body}</div>
         <div className="post-meta">
-          <span className="author">by <strong>{post.author}</strong> </span>
+          <span className="author">by <strong>{post.author}</strong></span>
           <span className="post-timestamp">{timeAgoFormat(post.timestamp)} </span>
           <span className="category">in <strong>{post.category}</strong> </span>
           <span className="post-commentsCount"><CommentsIcon /> {post.commentCount} </span>

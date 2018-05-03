@@ -88,17 +88,18 @@ class ModalForm extends Component {
                       value={this.state.formTitle}
                       onChange={(event)=>this.handleChange({formTitle: event.target.value})}
                     />
-                    <select
-                    className='category-select'
-                    value={this.state.formCategory && this.state.formCategory !== 'none' ? this.state.formCategory: 'none'}
-                    onChange={(event)=>this.handleChange({formCategory: event.target.value})}
-                    >
-                    <option value="none" disabled >Select a Category...</option>
-                    {categories && categories.map((cat,index) => (
-                        <option key={index} value={cat.name}>{cat.name}</option>
-                      ))}
-                    </select>
-                    </div>:''}
+                    {!isEditMode
+                      ?<select
+                      className='category-select'
+                      value={this.state.formCategory && this.state.formCategory !== 'none' ? this.state.formCategory: 'none'}
+                      onChange={(event)=>this.handleChange({formCategory: event.target.value})}
+                      >
+                      <option value="none" disabled >Select a Category...</option>
+                      {categories && categories.map((cat,index) => (
+                          <option key={index} value={cat.name}>{cat.name}</option>
+                        ))}
+                      </select>:''}
+                      </div>:''}
                   <textarea
                     rows="4"
                     cols="30"
