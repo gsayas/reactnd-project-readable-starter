@@ -18,11 +18,10 @@ class CategoryList extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            Readable (Reddit Clone)
+            <Link to="/">Readable</Link>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav bsStyle="pills" activeKey={1}>
-        <NavItem componentClass={Link} href="/" to="/" eventKey={1}>Home</NavItem>
         {categories && categories.map((category,index) => (
           <NavItem componentClass={Link} href="/" to={'/'+category.name} key={index} eventKey={1}>
             {this.capitalize(category.name)}
