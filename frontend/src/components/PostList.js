@@ -28,7 +28,7 @@ class PostList extends React.Component {
       }
     }
     //sort posts when they are first loaded into the component, or when orderBy changes
-    if( (this.props.posts.length === 0 && nextProps.posts.length > 0) ||
+    if( (nextProps.posts.length > this.props.posts.length) ||
         (this.props.orderBy !== nextProps.orderBy) ) {
         nextProps.posts.sort(sortBy(nextProps.orderBy));
     }
@@ -56,7 +56,6 @@ class PostList extends React.Component {
             {showingPosts && showingPosts.map((post) => (
               <li key={post.id}>
                 <Post
-                  listing={true}
                   post={post}
                 />
               </li>

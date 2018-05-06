@@ -13,10 +13,7 @@ class CommentList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    //sort comments when they are first loaded into the component
-    if (this.props.comments[nextProps.postId] === undefined && nextProps.comments[nextProps.postId] !== undefined ) {
-      nextProps.comments[nextProps.postId].sort(sortBy('-voteScore'));
-    }
+    nextProps.comments[nextProps.postId].sort(sortBy('-timestamp'));
   }
 
   render() {

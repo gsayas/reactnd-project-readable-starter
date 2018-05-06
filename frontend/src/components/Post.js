@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {asyncCastVoteOnPost, removePost} from "../actions";
 import EditPost from './EditPost.js';
 import {deletePost} from "../utils/PostsAPI";
@@ -30,8 +30,7 @@ class Post extends React.Component {
   };
 
   render() {
-    const {listing, post} = this.props;
-    // console.log('rendering post');
+    const {post} = this.props;
 
     return (
       <div className="post">

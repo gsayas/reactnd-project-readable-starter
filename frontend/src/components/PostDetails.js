@@ -36,7 +36,7 @@ class PostDetails extends React.Component {
     if( this.state.postFound === true ) {
       return (
         <div className='post-details-wrapper'>
-          {post && <Post listing={false} post={post}/>}
+          {post && <Post post={post}/>}
           {post && <CommentList postId={post.id}/>}
         </div>
       );

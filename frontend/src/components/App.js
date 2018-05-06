@@ -8,8 +8,7 @@ import '../App.css';
 import {loadCategories} from "../actions";
 import {getCategories} from "../utils/PostsAPI";
 import CategoryList from "./CategoryList";
-import { Navbar, Jumbotron, Grid, Button } from 'react-bootstrap';
-//TODO: optimize imports
+import { Jumbotron, Grid } from 'react-bootstrap';
 
 class App extends Component {
 
