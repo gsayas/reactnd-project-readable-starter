@@ -20,9 +20,11 @@ class PostList extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.categories!== undefined && nextProps.categories.length !== 0 && nextProps.category !== undefined) {
+    if (nextProps.categories !== undefined && nextProps.categories.length !== 0 && nextProps.category !== undefined) {
       if (nextProps.categories.find((category) => category.name === nextProps.category) === undefined) {
         this.setState({ categoryFound: false })
+      }else{
+        this.setState({ categoryFound: true })
       }
     }
     //sort posts when they are first loaded into the component, or when orderBy changes
@@ -41,7 +43,6 @@ class PostList extends React.Component {
     }else{
       showingPosts = posts;
     }
-    //TODO: show message when no posts are showing
 
     if( this.state.categoryFound === true ) {
       return (
@@ -64,7 +65,7 @@ class PostList extends React.Component {
         </div>
       )
     }else{
-      return (<div className='not-found'>Category not found</div>);//TODO: fix page jumping when category is not found
+      return (<div className='not-found'>Category not found</div>);
     }
 
   }
