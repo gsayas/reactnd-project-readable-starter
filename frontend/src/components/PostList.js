@@ -54,6 +54,7 @@ class PostList extends React.Component {
               <li key={post.id}>
                 <Post
                   post={post}
+                  listing={true}
                 />
               </li>
             ))}

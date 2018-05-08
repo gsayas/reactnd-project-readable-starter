@@ -1,5 +1,5 @@
 import * as Actions from "../actions/commentsActions.js";
-import {updateVotesForEntity} from "./commonUtils";
+import {updateVotesForEntity} from "./reducersUtils";
 
 const initialCommentsState = {}
 

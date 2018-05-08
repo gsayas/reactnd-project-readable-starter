@@ -1,6 +1,6 @@
 import * as Actions from "../actions/postsActions.js";
 import {ADD_COMMENT, REMOVE_COMMENT} from "../actions/commentsActions";
-import {updateVotesForEntity} from "./commonUtils";
+import {updateVotesForEntity} from "./reducersUtils";
 
 const initialPostsState = {
   posts: [],

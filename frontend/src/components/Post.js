@@ -30,7 +30,7 @@ class Post extends React.Component {
   };
 
   render() {
-    const {post} = this.props;
+    const {post, listing} = this.props;
 
     return (
       <div className="post">
@@ -39,7 +39,7 @@ class Post extends React.Component {
           <a href='javascript:void(0)' onClick={() => this.handleDelete(post.id)}>delete</a>
         </div>
         <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
-        <div className="post-body">{post.body}</div>
+        {!listing && <div className="post-body">{post.body}</div>}
         <div className="post-meta">
           <span className="author">by <strong>{post.author}</strong></span>
           <span className="post-timestamp">{timeAgoFormat(post.timestamp)} </span>
