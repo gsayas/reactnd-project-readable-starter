@@ -5,7 +5,7 @@ import PostDetails from './PostDetails.js';
 import {connect} from "react-redux";
 import Modal from 'react-modal';
 import '../App.css';
-import {loadCategories} from "../actions";
+import {loadCategories} from "../actions/postsActions.js";
 import {getCategories} from "../utils/PostsAPI";
 import CategoryList from "./CategoryList";
 import { Jumbotron, Grid } from 'react-bootstrap';

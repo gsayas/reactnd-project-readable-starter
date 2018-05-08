@@ -3,7 +3,7 @@ import * as PostsAPI from '../utils/PostsAPI';
 import Post from './Post.js';
 import CommentList from './CommentList.js';
 import {connect} from "react-redux";
-import {loadPost} from "../actions";
+import {loadPost} from "../actions/postsActions.js";
 
 
 class PostDetails extends React.Component {

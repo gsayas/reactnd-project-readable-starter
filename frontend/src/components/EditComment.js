@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {updateComment} from '../utils/PostsAPI.js';
-import {editComment} from "../actions";
+import {editComment} from "../actions/commentsActions.js";
 import CommentModal from "./CommentModal.js";
 
 class EditComment extends Component {

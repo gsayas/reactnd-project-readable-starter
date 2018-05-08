@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {updatePost} from '../utils/PostsAPI';
-import {editPost} from "../actions";
+import {editPost} from "../actions/postsActions.js";
 import PostModal from "./PostModal.js";
 
 class EditPost extends Component {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {asyncCastVoteOnPost, removePost} from "../actions";
+import {asyncCastVoteOnPost, removePost} from "../actions/postsActions.js";
 import EditPost from './EditPost.js';
 import {deletePost} from "../utils/PostsAPI";
 import CommentsIcon from 'react-icons/lib/fa/comments';
@@ -28,10 +28,6 @@ class Post extends React.Component {
         })
     }
   };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
 
   render() {
     const {post} = this.props;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {saveComment, getUUID} from '../utils/PostsAPI.js';
-import {addComment} from "../actions";
+import {addComment} from "../actions/commentsActions.js";
 import CommentModal from "./CommentModal.js";
 
 class CreateComment extends Component {

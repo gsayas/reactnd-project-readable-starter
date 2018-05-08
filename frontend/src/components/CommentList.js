@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {fetchComments} from "../actions";
+import {fetchComments} from "../actions/commentsActions.js";
 import Comment from './Comment.js';
 import CreateComment from './CreateComment.js';
 import sortBy from 'sort-by';

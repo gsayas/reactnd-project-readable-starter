@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {savePost, getUUID} from '../utils/PostsAPI';
-import {addPost} from "../actions";
+import {addPost} from "../actions/postsActions.js";
 import PostModal from "./PostModal.js";
 
 class CreatePost extends Component {

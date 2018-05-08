@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Post from './Post.js';
-import {fetchPosts, toggleOrder} from "../actions";
+import {fetchPosts, toggleOrder} from "../actions/postsActions.js";
 import sortBy from 'sort-by';
 import CreatePost from './CreatePost.js';
 
@@ -27,27 +27,6 @@ class PostList extends React.Component {
         this.setState({ categoryFound: true })
       }
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if(nextProps.posts.length !== this.props.posts.length){
-      return true;
-    }else if(this.votesHaveChanged(nextProps.posts)){
-      return false;
-    }else{
-      return true
-    }
-  }
-
-  votesHaveChanged(newPosts) {
-    console.log(newPosts);
-
-    for (let i = 0; i < newPosts.length; i++) {
-      if(this.props.posts[i].voteScore !== newPosts[i].voteScore){
-        return true;
-      }
-    }
-    return false;
   }
 
   render() {

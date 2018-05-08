@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import {asyncCastVoteOnComment, removeComment} from "../actions";
+import {asyncCastVoteOnComment, removeComment} from "../actions/commentsActions.js";
 import {deleteComment} from '../utils/PostsAPI';
 import EditComment from './EditComment.js';
 import {timeAgoFormat} from "../utils/helpers";
