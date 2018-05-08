@@ -3,15 +3,12 @@ import Modal from 'react-modal';
 import Loading from 'react-loading';
 import {connect} from 'react-redux';
 
-class ModalForm extends Component {
+class CommentModal extends Component {
   state = {
     modalOpen: false,
     isSavingForm: false,
     formBody: '',
     formAuthor: '',
-    formTitle: '',
-    formCategory: '',
-    formPristine: true
   }
 
   handleModalOpen = () => {
@@ -20,8 +17,6 @@ class ModalForm extends Component {
       modalOpen: true,
       formAuthor: entity !== undefined ? entity.author : '',
       formBody: entity !== undefined ? entity.body : '',
-      formTitle: entity !== undefined ? entity.title : '',
-      formCategory: entity !== undefined ? entity.category : ''
     }));
   }
 
@@ -30,8 +25,6 @@ class ModalForm extends Component {
       modalOpen: false,
       formAuthor: '',
       formBody: '',
-      formTitle: '',
-      formCategory: '',
       isSavingForm: false
     }));
   }
@@ -47,12 +40,12 @@ class ModalForm extends Component {
   handleSubmitForm = (e) => {
     e.preventDefault();
     this.setState(() => ({ isSavingForm: true }))
-    this.props.onModalSubmit({author: this.state.formAuthor, body: this.state.formBody, title: this.state.formTitle, category: this.state.formCategory});
+    this.props.onModalSubmit({author: this.state.formAuthor, body: this.state.formBody});
   }
 
   render() {
     const {modalOpen, isSavingForm} = this.state;
-    const {isEditMode, title, showTitleField, categories} = this.props;
+    const {isEditMode, title} = this.props;
 
     return (
       <div className='modal-form-wrapper'>
@@ -79,36 +72,15 @@ class ModalForm extends Component {
                       value={this.state.formAuthor}
                       onChange={(event)=>this.handleChange({formAuthor: event.target.value})}
                     />:''}
-                  {showTitleField
-                    ?<div>
-                    <input
-                      className='title-input'
-                      type='text'
-                      placeholder='Title'
-                      value={this.state.formTitle}
-                      onChange={(event)=>this.handleChange({formTitle: event.target.value})}
-                    />
-                    {!isEditMode
-                      ?<select
-                      className='category-select'
-                      value={this.state.formCategory && this.state.formCategory !== 'none' ? this.state.formCategory: 'none'}
-                      onChange={(event)=>this.handleChange({formCategory: event.target.value})}
-                      >
-                      <option value="none" disabled >Select a Category...</option>
-                      {categories && categories.map((cat,index) => (
-                          <option key={index} value={cat.name}>{cat.name}</option>
-                        ))}
-                      </select>:''}
-                      </div>:''}
                   <textarea
                     rows="4"
                     cols="30"
                     className='body-input'
-                    placeholder='post here!'
+                    placeholder='post your comment here!'
                     value={this.state.formBody}
                     onChange={(event)=>this.handleChange({formBody: event.target.value})}
                   />
-                  <button type="submit" disabled={false || isSavingForm}>{/*TODO: disable submit if form is empty*/}
+                  <button type="submit" disabled={isSavingForm}>
                     Submit
                   </button>
                 </div>
@@ -126,4 +98,4 @@ function mapStateToProps ({postsReducer}) {
   };
 }
 
-export default connect(mapStateToProps)(ModalForm);
+export default connect(mapStateToProps)(CommentModal);

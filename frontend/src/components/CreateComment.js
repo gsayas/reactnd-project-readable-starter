@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {saveComment, getUUID} from '../utils/PostsAPI.js';
 import {addComment} from "../actions";
-import ModalForm from "./ModalForm.js";
+import CommentModal from "./CommentModal.js";
 
 class CreateComment extends Component {
 
@@ -34,13 +34,12 @@ class CreateComment extends Component {
           className='leave-comment'>
           Leave a comment!
         </button>
-        <ModalForm
+        <CommentModal
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}
           entity={comment}
           title='Add New Comment'
           editMode={false}
-          showTitleField={false}
         />
       </div>
     )

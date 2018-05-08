@@ -29,6 +29,10 @@ class Post extends React.Component {
     }
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
+  }
+
   render() {
     const {post} = this.props;
 

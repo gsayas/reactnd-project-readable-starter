@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {savePost, getUUID} from '../utils/PostsAPI';
 import {addPost} from "../actions";
-import ModalForm from "./ModalForm.js";
+import PostModal from "./PostModal.js";
 
 class CreatePost extends Component {
 
@@ -33,13 +33,12 @@ class CreatePost extends Component {
           className='add-post'>
           Add a new Post
         </button>
-        <ModalForm
+        <PostModal
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}
           entity={post}
           title='Add new Post'
           isEditMode={false}
-          showTitleField={true}
         />
       </div>
     )

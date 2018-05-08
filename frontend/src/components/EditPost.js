@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {updatePost} from '../utils/PostsAPI';
 import {editPost} from "../actions";
-import ModalForm from "./ModalForm.js";
+import PostModal from "./PostModal.js";
 
 class EditPost extends Component {
 
@@ -32,13 +32,12 @@ class EditPost extends Component {
           onClick={()=>this.modal.handleModalOpen()}>
           edit
         </a>
-        <ModalForm
+        <PostModal
           onModalSubmit={(modalData)=>this.onModalSubmit(modalData)}
           onRef={ref => {this.modal = ref}}
           entity={post}
           title='Edit Post'
           isEditMode={true}
-          showTitleField={true}
         />
       </div>
     )
