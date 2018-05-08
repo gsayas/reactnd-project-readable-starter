@@ -9,7 +9,6 @@ class CommentList extends React.Component {
 
   componentDidMount(){
     this.props.dispatch(fetchComments(this.props.postId));
-
   }
 
   componentWillReceiveProps(nextProps) {
