@@ -1,5 +1,4 @@
-import * as Actions from "../actions/postsActions.js";
-import {ADD_COMMENT, REMOVE_COMMENT} from "../actions/commentsActions";
+import * as Actions from "../actions/types.js";
 import {updateVotesForEntity} from "./reducersUtils";
 
 const initialPostsState = {
@@ -15,12 +14,12 @@ export function postsReducer (state = initialPostsState, action) {
         ...state,
         posts: updateVotesForEntity(state.posts, action.postId, action.vote)
       }
-    case ADD_COMMENT:
+    case Actions.ADD_COMMENT:
       return {
         ...state,
         posts: updateCommentCountForPost(state.posts, action.postId, true)
       }
-    case REMOVE_COMMENT:
+    case Actions.REMOVE_COMMENT:
       return {
         ...state,
         posts: updateCommentCountForPost(state.posts, action.postId, false)

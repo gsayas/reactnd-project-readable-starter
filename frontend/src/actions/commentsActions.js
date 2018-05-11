@@ -1,9 +1,11 @@
 import * as PostsAPI from '../utils/PostsAPI';
-export const CAST_VOTE_ON_COMMENT = 'CAST_VOTE_ON_COMMENT';
-export const LOAD_COMMENTS = 'LOAD_COMMENTS';
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const EDIT_COMMENT = 'EDIT_COMMENT';
-export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+import {
+  CAST_VOTE_ON_COMMENT,
+  LOAD_COMMENTS,
+  ADD_COMMENT,
+  EDIT_COMMENT,
+  REMOVE_COMMENT
+} from '../actions/types.js';
 
 export function castVoteOnComment ({postId, commentId, vote}) {
   return {

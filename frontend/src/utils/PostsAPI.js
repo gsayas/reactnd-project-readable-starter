@@ -12,6 +12,7 @@ export const getAllPosts = () =>
 
 export const getPost = (postId) =>
   fetch(`${api}/posts/${postId}`, { headers })
+    .then(throwHttpErrors)
     .then(res => res.json())
     .then(data => data)
 
@@ -90,4 +91,11 @@ export const deleteComment = (commentId) =>
 
 export const getUUID = () => {
   return Math.random().toString(36).substring(2)+(new Date()).getTime().toString(36);
+}
+
+const throwHttpErrors = (response) => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
 }

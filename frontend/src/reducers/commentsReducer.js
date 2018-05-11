@@ -1,4 +1,4 @@
-import * as Actions from "../actions/commentsActions.js";
+import * as Actions from "../actions/types.js";
 import {updateVotesForEntity} from "./reducersUtils";
 
 const initialCommentsState = {}

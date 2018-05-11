@@ -1,12 +1,14 @@
 import * as PostsAPI from '../utils/PostsAPI';
-export const CAST_VOTE_ON_POST = 'CAST_VOTE_ON_POST';
-export const LOAD_POSTS = 'LOAD_POSTS';
-export const LOAD_POST = 'LOAD_POST';
-export const TOGGLE_ORDER = 'TOGGLE_ORDER';
-export const ADD_POST = 'ADD_POST';
-export const EDIT_POST = 'EDIT_POST';
-export const REMOVE_POST = 'REMOVE_POST';
-export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+import {
+  CAST_VOTE_ON_POST,
+  LOAD_POSTS,
+  LOAD_POST,
+  TOGGLE_ORDER,
+  ADD_POST,
+  EDIT_POST,
+  REMOVE_POST,
+  LOAD_CATEGORIES
+} from '../actions/types.js';
 
 export function castVoteOnPost ({postId, vote}) {
   return {
@@ -42,6 +44,13 @@ export const loadPost = post => ({
   type: LOAD_POST,
   post
 });
+
+export const fetchPost = (postId) => dispatch => (
+  PostsAPI
+    .getPost(postId)
+    .then((post) => dispatch(loadPost(post)))
+    .catch(error => console.log(error))
+);
 
 export function toggleOrder ({orderBy}) {
   return {
