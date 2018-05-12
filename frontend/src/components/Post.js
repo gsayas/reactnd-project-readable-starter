@@ -25,7 +25,7 @@ class Post extends React.Component {
       deletePost(postId)
         .then(() => {
           this.props.dispatch(removePost({postId}));
-          this.goBack();
+          this.goBack();//TODO instead implement basic message system
         })
     }
   };
@@ -36,6 +36,7 @@ class Post extends React.Component {
 
   render() {
     const {post, listing} = this.props;
+    console.log(window.history);
 
     return (
       <div className="post">

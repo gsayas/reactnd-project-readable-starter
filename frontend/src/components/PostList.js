@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Post from './Post.js';
-import {fetchPosts, toggleOrder} from "../actions/postsActions.js";
+import {fetchPosts, toggleOrder, clearErrors, reportError} from "../actions/postsActions.js";
 import sortBy from 'sort-by';
 import CreatePost from './CreatePost.js';
 
@@ -12,6 +12,7 @@ class PostList extends React.Component {
   }
 
   componentDidMount(){
+    this.props.dispatch(clearErrors());
     this.props.dispatch(fetchPosts());
   }
 
@@ -22,9 +23,7 @@ class PostList extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.categories !== undefined && nextProps.categories.length !== 0 && nextProps.category !== undefined) {
       if (nextProps.categories.find((category) => category.name === nextProps.category) === undefined) {
-        this.setState({ categoryFound: false })
-      }else{
-        this.setState({ categoryFound: true })
+        this.props.dispatch(reportError('Page not found'))
       }
     }
   }
@@ -41,7 +40,7 @@ class PostList extends React.Component {
 
     showingPosts.sort(sortBy(this.props.orderBy));
 
-    if( this.state.categoryFound === true ) {
+    if( !this.props.notFoundError ) {
       return (
         <div className="post-list-wrapper">
           <span className='order-block'>Sort by:&nbsp;
