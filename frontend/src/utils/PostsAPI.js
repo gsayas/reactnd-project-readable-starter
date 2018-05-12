@@ -14,7 +14,7 @@ export const getPost = (postId) =>
   fetch(`${api}/posts/${postId}`, { headers })
     .then(throwHttpErrors)
     .then(res => res.json())
-    .then(data => data)
+    .then(data => {return data.id !== undefined ? data : throwNotFoundError()})
 
 export const getPostComments = (postId) =>
   fetch(`${api}/posts/${postId}/comments`, { headers })
@@ -98,4 +98,8 @@ const throwHttpErrors = (response) => {
     throw Error(response.statusText);
   }
   return response;
+}
+
+const throwNotFoundError = () => {
+  throw Error('Page Not Found');
 }

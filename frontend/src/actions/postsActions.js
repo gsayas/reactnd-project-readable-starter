@@ -7,7 +7,9 @@ import {
   ADD_POST,
   EDIT_POST,
   REMOVE_POST,
-  LOAD_CATEGORIES
+  LOAD_CATEGORIES,
+  REPORT_REPORT,
+  CLEAR_ERRORS
 } from '../actions/types.js';
 
 export function castVoteOnPost ({postId, vote}) {
@@ -40,17 +42,26 @@ export const fetchPosts = () => dispatch => (
     .then((posts) => dispatch(loadPosts(posts)))
 );
 
+export const fetchPost = (postId) => dispatch => (
+  PostsAPI
+    .getPost(postId)
+    .then((post) => dispatch(loadPost(post)))
+    .catch(error => dispatch(reportError(error)))
+);
+
 export const loadPost = post => ({
   type: LOAD_POST,
   post
 });
 
-export const fetchPost = (postId) => dispatch => (
-  PostsAPI
-    .getPost(postId)
-    .then((post) => dispatch(loadPost(post)))
-    .catch(error => console.log(error))
-);
+export const reportError = error => ({
+  type: REPORT_REPORT,
+  error
+});
+
+export const clearErrors = () => ({
+  type: CLEAR_ERRORS
+});
 
 export function toggleOrder ({orderBy}) {
   return {

@@ -3,7 +3,8 @@ import {updateVotesForEntity} from "./reducersUtils";
 
 const initialPostsState = {
   posts: [],
-  orderBy: 'voteScore'
+  orderBy: 'voteScore',
+  notFoundError: false
 }
 
 export function postsReducer (state = initialPostsState, action) {
@@ -41,6 +42,16 @@ export function postsReducer (state = initialPostsState, action) {
           ...state.posts,
           action.post
         ],
+      }
+    case Actions.REPORT_REPORT:
+      return {
+        ...state,
+        notFoundError: true
+      }
+    case Actions.CLEAR_ERRORS:
+      return {
+        ...state,
+        notFoundError: false
       }
     case Actions.ADD_POST:
       return {

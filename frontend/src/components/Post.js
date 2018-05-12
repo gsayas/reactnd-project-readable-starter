@@ -25,9 +25,14 @@ class Post extends React.Component {
       deletePost(postId)
         .then(() => {
           this.props.dispatch(removePost({postId}));
+          this.goBack();
         })
     }
   };
+
+  goBack = () => {
+    window.history.back();
+  }
 
   render() {
     const {post, listing} = this.props;
