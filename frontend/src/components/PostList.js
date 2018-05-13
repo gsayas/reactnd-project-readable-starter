@@ -7,12 +7,7 @@ import CreatePost from './CreatePost.js';
 
 class PostList extends React.Component {
 
-  state = {
-    categoryFound: true
-  }
-
   componentDidMount(){
-    this.props.dispatch(clearErrors());
     this.props.dispatch(fetchPosts());
   }
 
@@ -23,7 +18,8 @@ class PostList extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.categories !== undefined && nextProps.categories.length !== 0 && nextProps.category !== undefined) {
       if (nextProps.categories.find((category) => category.name === nextProps.category) === undefined) {
-        this.props.dispatch(reportError('Page not found'))
+        this.props.dispatch(reportError('Category not found'))
+        console.log(nextProps);
       }
     }
   }
@@ -40,8 +36,8 @@ class PostList extends React.Component {
 
     showingPosts.sort(sortBy(this.props.orderBy));
 
-    if( !this.props.notFoundError ) {
       return (
+        !this.props.notFoundError ?
         <div className="post-list-wrapper">
           <span className='order-block'>Sort by:&nbsp;
             <a href='javascript:void(0)' onClick={() => this.handleOrdering('voteScore')}>score</a>|
@@ -58,11 +54,9 @@ class PostList extends React.Component {
               </li>
             ))}
           </ul>
-        </div>
+        </div>:''
       )
-    }else{
-      return (<div className='not-found'>Category not found</div>);
-    }
+
 
   }
 }

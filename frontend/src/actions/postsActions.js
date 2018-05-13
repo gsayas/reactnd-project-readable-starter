@@ -46,7 +46,7 @@ export const fetchPost = (postId) => dispatch => (
   PostsAPI
     .getPost(postId)
     .then((post) => dispatch(loadPost(post)))
-    .catch(error => dispatch(reportError(error)))
+    .catch(error => dispatch(reportError('Post not found')))
 );
 
 export const loadPost = post => ({

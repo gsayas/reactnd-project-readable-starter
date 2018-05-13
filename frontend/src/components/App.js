@@ -9,6 +9,7 @@ import {loadCategories} from "../actions/postsActions.js";
 import {getCategories} from "../utils/PostsAPI";
 import CategoryList from "./CategoryList";
 import { Jumbotron, Grid } from 'react-bootstrap';
+import Messages from "./Messages";
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
        <CategoryList categories={this.props.categories}/>
        <Jumbotron>
          <Grid>
+           <Messages />
            <Route exact path='/' render={() => (
              <PostList />
            )}/>

@@ -8,7 +8,6 @@ import {clearErrors, fetchPost} from "../actions/postsActions";
 class PostDetails extends React.Component {
 
   componentDidMount(){
-    this.props.dispatch(clearErrors());
     const postId = this.props.postId;
     if (this.props.posts === undefined || !this.props.posts.find(item => item.id === postId)) {
       this.props.dispatch(fetchPost(postId));
@@ -24,8 +23,8 @@ class PostDetails extends React.Component {
         <div className='post-details-wrapper'>
           {post && <Post post={post} listing={false}/>}
           {post && <CommentList postId={post.id}/>}
-        </div>
-      :<NotFound />);
+        </div>:''
+      );
   }
 }
 
