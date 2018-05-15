@@ -32,7 +32,6 @@ class Post extends React.Component {
 
   render() {
     const {post, listing} = this.props;
-    console.log(window.history);
 
     return (
       <div className="post">

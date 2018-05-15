@@ -49,7 +49,7 @@ export function postsReducer (state = initialPostsState, action) {
         notFoundError: action.error
       }
     case Actions.CLEAR_ERRORS:
-      console.log('cleaning');
+      // console.log('cleaning');
       return {
         ...state,
         notFoundError: false
