@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {updateComment} from '../utils/PostsAPI.js';
 import {editComment} from "../actions/commentsActions.js";
 import CommentModal from "./CommentModal.js";
+import {reportMessage} from "../actions/postsActions";
 
 class EditComment extends Component {
 
@@ -17,6 +18,7 @@ class EditComment extends Component {
       .then(() => {
         this.modal.handleModalClose();
         this.props.dispatch(editComment({comment: commentUpdater, postId: this.props.postId}));
+        this.props.dispatch(reportMessage('Comment successfully edited'));
       })
   }
 

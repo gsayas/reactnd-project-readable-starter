@@ -1,9 +1,8 @@
 import React from 'react';
 import Post from './Post.js';
 import CommentList from './CommentList.js';
-import NotFound from './NotFound.js';
 import {connect} from "react-redux";
-import {clearErrors, fetchPost} from "../actions/postsActions";
+import {fetchPost} from "../actions/postsActions";
 
 class PostDetails extends React.Component {
 
@@ -19,19 +18,18 @@ class PostDetails extends React.Component {
     const post = posts ? posts.find(item => item.id === postId) : false;
 
     return (
-      !this.props.notFoundError ?
-        <div className='post-details-wrapper'>
-          {post && <Post post={post} listing={false}/>}
-          {post && <CommentList postId={post.id}/>}
-        </div>:''
-      );
+      <div className='post-details-wrapper'>
+        {post && <Post post={post} listing={false}/>}
+        {post && <CommentList postId={post.id}/>}
+      </div>
+    );
   }
 }
 
 function mapStateToProps ({postsReducer}) {
   return {
     posts: postsReducer.posts,
-    notFoundError: postsReducer.notFoundError
+    messages: postsReducer.messages
   }
 }
 

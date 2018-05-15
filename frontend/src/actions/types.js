@@ -13,5 +13,5 @@ export const ADD_POST = 'ADD_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const REMOVE_POST = 'REMOVE_POST';
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
-export const REPORT_REPORT = 'REPORT_REPORT';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const REPORT_MESSAGE = 'REPORT_MESSAGE';
+export const CLEAR_MESSAGES = 'CLEAR_MESSAGES';

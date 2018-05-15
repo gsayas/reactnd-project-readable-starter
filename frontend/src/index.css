@@ -84,3 +84,11 @@ Override Bootstrap styles
 .navbar {
     margin-bottom: 0;
 }
+
+.jumbotron {
+    padding-top: 10px;
+}
+
+.alert {
+    height: 52px;
+}

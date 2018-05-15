@@ -8,8 +8,8 @@ import {
   EDIT_POST,
   REMOVE_POST,
   LOAD_CATEGORIES,
-  REPORT_REPORT,
-  CLEAR_ERRORS
+  REPORT_MESSAGE,
+  CLEAR_MESSAGES
 } from '../actions/types.js';
 
 export function castVoteOnPost ({postId, vote}) {
@@ -46,7 +46,7 @@ export const fetchPost = (postId) => dispatch => (
   PostsAPI
     .getPost(postId)
     .then((post) => dispatch(loadPost(post)))
-    .catch(error => dispatch(reportError('Post not found')))
+    .catch(error => dispatch(reportMessage('Post not found')))
 );
 
 export const loadPost = post => ({
@@ -54,13 +54,13 @@ export const loadPost = post => ({
   post
 });
 
-export const reportError = error => ({
-  type: REPORT_REPORT,
-  error
+export const reportMessage = message => ({
+  type: REPORT_MESSAGE,
+  message
 });
 
-export const clearErrors = () => ({
-  type: CLEAR_ERRORS
+export const clearMessages = () => ({
+  type: CLEAR_MESSAGES
 });
 
 export function toggleOrder ({orderBy}) {

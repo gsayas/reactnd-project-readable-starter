@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {saveComment, getUUID} from '../utils/PostsAPI.js';
 import {addComment} from "../actions/commentsActions.js";
 import CommentModal from "./CommentModal.js";
+import {reportMessage} from "../actions/postsActions";
 
 class CreateComment extends Component {
 
@@ -21,6 +22,7 @@ class CreateComment extends Component {
       .then((savedComment) => {
         this.modal.handleModalClose();
         this.props.dispatch(addComment({comment: savedComment, postId: this.props.postId}));
+        this.props.dispatch(reportMessage('Comment successfully added!'));
       })
 
   }

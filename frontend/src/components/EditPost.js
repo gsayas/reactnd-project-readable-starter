@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {updatePost} from '../utils/PostsAPI';
 import {editPost} from "../actions/postsActions.js";
 import PostModal from "./PostModal.js";
+import {reportMessage} from "../actions/postsActions";
 
 class EditPost extends Component {
 
@@ -19,6 +20,7 @@ class EditPost extends Component {
       .then(() => {
         this.modal.handleModalClose();
         this.props.dispatch(editPost({post: postUpdater}));
+        this.props.dispatch(reportMessage('Post successfully edited'));
       })
   }
 

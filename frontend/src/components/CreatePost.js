@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {savePost, getUUID} from '../utils/PostsAPI';
 import {addPost} from "../actions/postsActions.js";
 import PostModal from "./PostModal.js";
+import {reportMessage} from "../actions/postsActions";
 
 class CreatePost extends Component {
 
@@ -20,6 +21,7 @@ class CreatePost extends Component {
       .then((savedPost) => {
         this.modal.handleModalClose();
         this.props.dispatch(addPost({post: savedPost}));
+        this.props.dispatch(reportMessage('Post successfully added!'));
       })
   }
 

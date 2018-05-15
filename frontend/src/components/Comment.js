@@ -7,6 +7,7 @@ import EditComment from './EditComment.js';
 import {timeAgoFormat} from "../utils/helpers";
 import ThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-down';
+import {reportMessage} from "../actions/postsActions";
 
 
 class Comment extends React.Component {
@@ -23,6 +24,7 @@ class Comment extends React.Component {
       deleteComment(commentId)
         .then(() => {
           this.props.dispatch(removeComment({postId, commentId}));
+          this.props.dispatch(reportMessage('Comment successfully deleted'));
         })
     }
   };

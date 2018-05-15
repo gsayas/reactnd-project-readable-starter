@@ -1,38 +1,36 @@
 import React, {Component} from 'react';
-import {Alert, Collapse} from 'react-bootstrap';
+import {Alert, Fade} from 'react-bootstrap';
 import {connect} from "react-redux";
-import {clearErrors} from "../actions/postsActions";
+import {clearMessages} from "../actions/postsActions";
 import ReactTimeout from 'react-timeout'
 
 class Messages extends Component {
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props);
-    if(nextProps.notFoundError !== this.props.notFoundError && nextProps.notFoundError) {
-      console.log(nextProps);
-      this.props.setTimeout(this.clearMessages, 5000);
+    if(nextProps.messages !== this.props.messages && nextProps.messages) {
+      window.setTimeout(this.clearMessages, 5000);
     }
   }
 
   clearMessages = () => {
     //console.log('works');
-    this.props.dispatch(clearErrors());
+    this.props.dispatch(clearMessages());
   }
 
   render() {
     return (
-      <Collapse in={this.props.notFoundError !== false}>
+      <Fade in={this.props.messages !== false}>
         <Alert bsStyle="warning">
-          {this.props.notFoundError}
+          {this.props.messages}
         </Alert>
-      </Collapse>
+      </Fade>
     )
   }
 }
 
 function mapStateToProps ({postsReducer}) {
   return {
-    notFoundError: postsReducer.notFoundError
+    messages: postsReducer.messages
   }
 }
 
