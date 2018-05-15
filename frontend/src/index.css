@@ -86,9 +86,10 @@ Override Bootstrap styles
 }
 
 .jumbotron {
-    padding-top: 10px;
+    padding-top: 8px;
 }
 
 .alert {
     height: 52px;
+    margin-bottom: 8px;
 }

@@ -1,4 +1,4 @@
-#Readable - A Reddit Clone
+# Readable - A Reddit Clone
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 You can find the most recent version of their docs [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
@@ -23,6 +23,7 @@ To get started developing right away:
       1.2. Create new Posts
       1.3. Edit Posts
       1.4. Delete Posts
+      1.5. Vote on Posts
     2. List Posts by Category
     3. Show Post Details
     4. List Comments for each post
@@ -30,6 +31,7 @@ To get started developing right away:
       4.2. Create new comments
       4.3. Edit Comments
       4.4. Delete Comments
+      4.5. Vote on posts and comments  
     5. Sort Posts by vote score or date
      
         

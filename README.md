@@ -1,10 +1,10 @@
-This project is a fork of [Readable](https://github.com/udacity/reactnd-project-readable-starter). 
+# Readable (a Reddit Clone)
 
-This is the final assessment project for Udacity's Redux course, part of the React Developer Nanodegree. 
+This is a fork of [Readable](https://github.com/udacity/reactnd-project-readable-starter), the final assessment project for Udacity's Redux course, part of the React Developer Nanodegree Program. 
 
-Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+Users are able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users are also able to edit and delete posts and comments.
 
-# Readable API Server
+## Readable API Server
 
 This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
 
